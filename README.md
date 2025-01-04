@@ -25,7 +25,7 @@ All endpoints that require a current user to be logged in.
     {
       "message": "Authentication required",
       "statusCode": 401
-    }
+    }                      
     ```
 
 ### All endpoints that require proper authorization
