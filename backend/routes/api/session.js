@@ -1,9 +1,6 @@
-
-
 const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
-
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
@@ -22,26 +19,6 @@ const validateLogin = [
     handleValidationErrors
   ];
 
-router.get(
-    '/',
-    (req, res) => {
-      const { user } = req;
-      if (user) {
-        const safeUser = {
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          username: user.username,
-        };
-        return res.json({
-          user: safeUser
-        });
-      } else return res.json({ user: null });
-    }
-  );
-
-// Log in
 router.post(
     '/',
     validateLogin,
@@ -67,19 +44,32 @@ router.post(
 
       const safeUser = {
         id: user.id,
+        email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
-        username: user.username
+        username: user.username,
       };
 
       await setTokenCookie(res, safeUser);
 
-      return res.json({
-        user: safeUser
+      return res.status(200).json({
+        user: safeUser,
       });
-    }
-  );
+    });
+
+  router.get("/", (req, res) => {
+    const { user } = req;
+    if (user) {
+      const safeUser = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      };
+      return res.status(200).json({ user: safeUser });
+    } else return res.status(200).json({ user: null });
+  });
 
 
   router.delete(
@@ -87,8 +77,7 @@ router.post(
     (_req, res) => {
       res.clearCookie('token');
       return res.json({ message: 'success' });
-    }
-  );
+    });
 
 
 
