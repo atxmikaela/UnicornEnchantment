@@ -1,0 +1,9 @@
+{
+    "scripts": {
+      "backend-install": "cd backend && npm install",
+      "backend-migrate": "cd backend && npm run sequelize db:migrate",
+      "frontend-install": "cd frontend && npm install",
+      "frontend-build": "cd frontend && npm run build",
+      "build": "npm run backend-install && npm run backend-migrate && npm run frontend-install && npm run frontend-build"
+    }
+  }
