@@ -1,9 +1,10 @@
 {
-    "scripts": {
-      "backend-install": "cd backend && npm install",
-      "backend-migrate": "cd backend && npm run sequelize db:migrate",
-      "frontend-install": "cd frontend && npm install",
-      "frontend-build": "cd frontend && npm run build",
-      "build": "npm run backend-install && npm run backend-migrate && npm run frontend-install && npm run frontend-build"
-    }
+"scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
   }
+}
