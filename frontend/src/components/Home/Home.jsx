@@ -1,2 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+
+
+
+function Home() {
+
+
+    return (
+        <>
+      <h1>I am doing this</h1>
+      </>
+    )
+  }
+
+export default Home;
