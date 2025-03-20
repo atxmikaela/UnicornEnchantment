@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginFormModal from './components/LoginFormModal';
 import SignupFormModal from './components/SignupFormModal';
-import Home from './components/Home';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import NameOfSpot from './components/Spots/NameOfSpot';
@@ -11,6 +10,8 @@ import CreateASpot from './components/Spots/CreateASpot';
 import ManageSpot from './components/Spots/ManageSpot';
 import UpdateSpot from './components/Spots/UpdateSpot';
 import ManageReviews from './components/Reviews/ManageReviews';
+import UnicornLanding from './components/UnicornLanding';
+
 
 function Layout() {
   const dispatch = useDispatch();
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <UnicornLanding />,
+
       },
       {
         path: "login",
