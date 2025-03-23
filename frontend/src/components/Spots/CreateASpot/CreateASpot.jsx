@@ -6,7 +6,7 @@
 
 
 function CreateASpot() {
-    return <h1>Create a Spot</h1>;
+    return <h1 fontcolor="red">Create a Spot</h1>;
   }
 
 

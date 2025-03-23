@@ -1,0 +1,11 @@
+
+.spot-image-container{
+    margin: 5px;
+    width: 400px
+}
+
+.spot-image {
+    width: 100%;
+    height: 390px;
+    border-radius: 10%;
+}

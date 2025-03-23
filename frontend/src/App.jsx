@@ -10,7 +10,8 @@ import CreateASpot from './components/Spots/CreateASpot';
 import ManageSpot from './components/Spots/ManageSpot';
 import UpdateSpot from './components/Spots/UpdateSpot';
 import ManageReviews from './components/Reviews/ManageReviews';
-import UnicornLanding from './components/UnicornLanding';
+import Splash from './components/Splash';
+import SpotDetail from './components/SpotDetail';
 
 
 function Layout() {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <UnicornLanding />,
+        element: <Splash />,
 
       },
       {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "spots/:id",
-        element: <NameOfSpot />
+        element: <SpotDetail />
       },
       {
         path: "spots/new",
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <h2>Where you going?</h2>
+        element: <h1>Where you going? You are going to get abducted!</h1>
       },
 
     ]
