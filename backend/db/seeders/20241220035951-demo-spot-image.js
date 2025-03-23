@@ -19,22 +19,22 @@ module.exports = {
       {
         spotId: 1,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 1,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 1,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 1,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 2,
@@ -44,22 +44,22 @@ module.exports = {
       {
         spotId: 2,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 2,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 2,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 2,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 3,
@@ -69,22 +69,22 @@ module.exports = {
       {
         spotId: 3,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 3,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 3,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 3,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 4,
@@ -94,22 +94,22 @@ module.exports = {
       {
         spotId: 4,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 4,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 4,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 4,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
@@ -119,22 +119,22 @@ module.exports = {
       {
         spotId: 5,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 5,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 6,
@@ -144,22 +144,22 @@ module.exports = {
       {
         spotId: 6,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 6,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 6,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 6,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 7,
@@ -169,22 +169,22 @@ module.exports = {
       {
         spotId: 7,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 7,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 7,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 7,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 8,
@@ -194,22 +194,22 @@ module.exports = {
       {
         spotId: 8,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 8,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 8,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 8,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 9,
@@ -219,22 +219,22 @@ module.exports = {
       {
         spotId: 9,
         url: '/1_2.jpg',
-        preview: true
+        preview: false,
       },
       {
         spotId: 9,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 9,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 9,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 10,
@@ -244,22 +244,22 @@ module.exports = {
       {
         spotId: 10,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 10,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 10,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 10,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 11,
@@ -269,22 +269,22 @@ module.exports = {
       {
         spotId: 11,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 11,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 11,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 11,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 12,
@@ -294,22 +294,22 @@ module.exports = {
       {
         spotId: 12,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 12,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 12,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 12,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 13,
@@ -319,22 +319,22 @@ module.exports = {
       {
         spotId: 13,
         url: '/1_2.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 13,
         url: '/1_3.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 13,
         url: '/1_4.jpg',
-        preview: true
+        preview: false
       },
       {
         spotId: 13,
         url: '/1_5.jpg',
-        preview: true
+        preview: false
       },
 
 

@@ -333,3 +333,6 @@ This article lays out best practices for your Git workflow, which allows you to 
 Be aware that there are consequences of not following these best practices. If you do not follow the feature -> dev -> main pattern as you work on your project, you will risk running out of build minutes on your Render account.
 
 Running out of build minutes will impact ALL of your projects that are hosted on Render. See this article on Build LimitsLinks to an external site. for more details on how build minutes are calculated, and what to do if you run out of build minutes for your projects.
+
+
+star 

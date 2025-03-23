@@ -21,21 +21,21 @@ export const getSpotsThunk = () => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(getAllSpotsAction(data.Spots));
-
     } else {
       const errorData = await res.json();
     }
-  } catch (error) {
-  }
-}
+  } catch (error) {}
+};
 
 // step 7
 // normalizing our state
 
-const initialState = {
+const initialStateSpots = {
   allSpots: [],
   byId: {},
 };
+
+const initialState = {};
 
 // REDUCER
 
