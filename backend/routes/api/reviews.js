@@ -127,6 +127,8 @@ router.get("/current", requireAuth, async (req, res, next) => {
 });
 
 
+
+
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   const reviewId = req.params.reviewId;
   const uid = req.user.id;
@@ -235,7 +237,7 @@ router.put(
   validateReview,
   async (req, res, next) => {
     const reviewId = req.params.reviewId;
-    console.log(reviewId);
+    (reviewId);
     const uid = req.user.id;
     const { review, stars } = req.body;
 

@@ -1,88 +1,66 @@
-// IMPORTS
-// import { csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
-// // ACTION TYPES
-// const GET_ALL_SPOTS = "/spot/getAllSpots";
-// const GET_ONE_SPOT = "/spot/getOneSpot";
+// ACTION TYPES
+const GET_ALL_REVIEWS = "/review/getAllReviews";
 
-// //step 6
-// // ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
-// export const getAllSpotsAction = (spots) => {
-//   const action = {
-//     type: GET_ALL_SPOTS,
-//     payload: spots,
-//   };
-//   return action;
-// };
+// ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
+export const getAllReviewsAction = (reviews) => {
+    const action = {
+        type: GET_ALL_REVIEWS,
+        payload: reviews,
+    };
+    return action;
+};
 
-// export const getOneSpot = (spot) => {
-//   const action = {
-//   type: GET_ONE_SPOT,
-//     payload: spot
-// }
-//   return action;
-// }
+// THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
+export const getReviewsThunk = (spotId) => async (dispatch) => {
+    try {
+        ("Fetching reviews for spotId:", spotId);
+        const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+        if (res.ok) {
+            const data = await res.json();
+            ("API response:", data);
+            ("Reviews data:", data.Reviews);
+            dispatch(getAllReviewsAction(data.Reviews));
+            ("Action dispatched:", getAllReviewsAction(data.Reviews));
+        } else {
+            const errorData = await res.json();
+            console.error("API error:", errorData);
+        }
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+};
 
-// // THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
-// export const getSpotsThunk = () => async (dispatch) => {
-//   try {
-//     const res = await csrfFetch("/api/spots");
-//     if (res.ok) {
-//       const data = await res.json();
-//       dispatch(getAllSpotsAction(data.Spots));
+// normalizing our state
 
-//     } else {
-//       const errorData = await res.json();
-//     }
-//   } catch (error) {
-//   }
-// }
+const initialState = {
+    allReviews: null,
+    byId: {}, // Correct initial state
+};
 
-// export const getOneSpotThunk = () => async (dispatch) => {
-//   try {
-//     const res = await csrfFetch("/api/spots/:spotId");
-//     if (res.ok) {
-//       const data = await res.json();
-//       dispatch(getOneSpotAction(data.spot));
-//       console.log(data.spot)
+// REDUCER
 
-//     } else {
-//       const errorData = await res.json();
-//     }
-//   } catch (error) {
-//   }
-// }
+const reviewsReducer = (state = initialState, action) => {
+    let newState;
+    ("Reducer action:", action);
+    switch (action.type) {
+        case GET_ALL_REVIEWS: {
+            const reviewsArr = action.payload;
+            ("Reducer payload:", reviewsArr);
+            newState = { ...state };
+            newState.allReviews = reviewsArr;
+            let newByIdGetAllReviews = {};
+            for (let review of reviewsArr) {
+                newByIdGetAllReviews[review.id] = review;
+            }
+            newState.byId = newByIdGetAllReviews;
+            ("Reducer new state:", newState);
+            return newState;
+        }
+        default:
+            return state;
+    }
+};
 
-// // step 7
-// // normalizing our state
-
-// const initialStateSpots = {
-//   allSpots: [],
-//   byId: {},
-// };
-
-// const initialState = {};
-
-// // REDUCER
-
-// const spotsReducer = (state = initialState, action) => {
-//   let newState;
-//   switch (action.type) {
-//     case GET_ALL_SPOTS: {
-//       const spotsArr = action.payload;
-//       newState = { ...state };
-//       newState.allSpots = spotsArr;
-//       let newByIdGetAllSpots = {};
-//       for (let spot of spotsArr) {
-//         newByIdGetAllSpots[spot.id] = spot;
-//       }
-//       newState.byId = newByIdGetAllSpots;
-
-//       return newState;
-//     }
-//     default:
-//       return state;
-//   }
-// };
-
-// export default spotsReducer;
+export default reviewsReducer;
