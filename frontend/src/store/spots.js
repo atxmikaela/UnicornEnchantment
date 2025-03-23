@@ -27,7 +27,7 @@ export const getSpotsThunk = () => async (dispatch) => {
     }
   } catch (error) {
   }
-};
+}
 
 // step 7
 // normalizing our state

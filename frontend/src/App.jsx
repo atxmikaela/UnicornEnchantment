@@ -5,7 +5,6 @@ import LoginFormModal from './components/LoginFormModal';
 import SignupFormModal from './components/SignupFormModal';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
-import NameOfSpot from './components/Spots/NameOfSpot';
 import CreateASpot from './components/Spots/CreateASpot';
 import ManageSpot from './components/Spots/ManageSpot';
 import UpdateSpot from './components/Spots/UpdateSpot';
