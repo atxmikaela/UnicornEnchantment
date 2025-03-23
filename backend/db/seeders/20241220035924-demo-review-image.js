@@ -13,15 +13,263 @@ module.exports = {
     await ReviewImage.bulkCreate([
       {
         reviewId: 1,
-        url: 'https://ghk.h-cdn.co/assets/16/13/3200x2400/sd-aspect-1459268194-gettyimages-176570508.jpg'
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 1,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 1,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 1,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 1,
+        url: '/r5.jpeg'
       },
       {
         reviewId: 2,
-        url: 'https://cdn.shopify.com/s/files/1/0757/8393/0173/files/dreamlike-unicorn-walking_480x480.jpg?v=1695293096'
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 2,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 2,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 2,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 2,
+        url: '/r5.jpeg'
       },
       {
         reviewId: 3,
-        url: 'https://www.snexplores.org/wp-content/uploads/2020/03/1030_onwardunicorns-1-1028x579.png'
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 3,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 3,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 3,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 3,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 4,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 4,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 4,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 4,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 4,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 5,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 5,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 5,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 5,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 5,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 6,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 6,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 6,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 6,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 6,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 7,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 7,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 7,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 7,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 7,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 8,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 8,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 8,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 8,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 8,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 9,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 9,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 9,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 9,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 9,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 10,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 10,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 10,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 10,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 10,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 11,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 11,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 11,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 11,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 11,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 12,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 12,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 12,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 12,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 12,
+        url: '/r5.jpeg'
+      },
+      {
+        reviewId: 13,
+        url: '/r1.jpeg'
+      },
+      {
+        reviewId: 13,
+        url: '/r2.jpeg'
+      },
+      {
+        reviewId: 13,
+        url: '/r3.jpeg'
+      },
+      {
+        reviewId: 13,
+        url: '/r4.jpeg'
+      },
+      {
+        reviewId: 13,
+        url: '/r5.jpeg'
       }
     ], { validate: true });
   },

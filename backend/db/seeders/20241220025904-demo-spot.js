@@ -11,98 +11,163 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
     await Spot.bulkCreate([
-      {
-        {
-          "ownerId": 1,
-          "address": "123 Main Street",
-          "city": "Ames",
-          "state": "IA",
-          "country": "United States of America",
-          "lat": 42.0347,
-          "lng": -93.6203,
-          "name": "The Iowa Corn Comet Crash Pad",
-          "description": "Welcome to the heart of corn country! This unique rental is a converted corn-shaped UFO, a relic of the great 'Maize Mayhem' of 2042. After the crash, local farmers ingeniously transformed these alien vessels into comfortable dwellings. Step inside and find a blend of rustic charm and futuristic design. The original alien control panel, now a decorative centerpiece, glows softly at night, adding an otherworldly ambiance. The spacious living area features reclaimed wood from the original spaceship's hull, and the bedrooms offer panoramic views of the surrounding cornfields. Enjoy a fully equipped kitchen with modern appliances, perfect for preparing a hearty breakfast or a gourmet dinner. Outside, a large patio provides ample space for stargazing or simply relaxing and soaking in the serene atmosphere. Just a short drive away, you'll find local attractions like the Iowa State University campus, the Reiman Gardens, and numerous farm-to-table restaurants. Experience a truly unique getaway in this one-of-a-kind corn-ship!",
-          "price": 180.00
-        },
-        {
-          "ownerId": 2,
-          "address": "456 Elm Street",
-          "city": "Roswell",
-          "state": "NM",
-          "country": "United States of America",
-          "lat": 33.3959,
-          "lng": -104.5225,
-          "name": "The Roswell Kernel Kastle",
-          "description": "Step into history at this converted corn-shaped UFO, located right in the heart of Roswell, the epicenter of the 'Maize Mayhem' landings. This extraordinary rental offers a blend of alien mystique and modern comfort. The interior features original alien technology repurposed into unique lighting fixtures and decorative elements. The living area is spacious and inviting, with plush seating and a large flat-screen TV. The bedrooms are designed for ultimate relaxation, with comfortable beds and blackout curtains for a restful night's sleep. The fully equipped kitchen boasts stainless steel appliances and all the cookware you need to prepare delicious meals. Outside, a private patio offers stunning views of the New Mexico desert. Explore the nearby International UFO Museum and Research Center, or take a scenic drive through the breathtaking landscapes of the region. This is more than just a rental; it's an immersive experience into the fascinating world of alien encounters and corn-shaped spaceships.",
-          "price": 220.00
-        },
-        {
-          "ownerId": 3,
-          "address": "789 Oak Avenue",
-          "city": "Normal",
-          "state": "IL",
-          "country": "United States of America",
-          "lat": 40.5097,
-          "lng": -88.9918,
-          "name": "The Normal Niblet Nook",
-          "description": "Experience the unexpected charm of Normal, Illinois, in this uniquely converted corn-shaped UFO. This rental offers a surprising blend of rural tranquility and alien intrigue. The interior design seamlessly combines rustic elements with futuristic touches, creating a cozy and inviting atmosphere. The living area features comfortable seating and a fireplace, perfect for relaxing after a day of exploring. The bedrooms are designed for ultimate comfort, with plush bedding and ample storage space. The fully equipped kitchen boasts modern appliances and all the cookware you need to prepare delicious meals. Outside, a spacious deck offers stunning views of the surrounding countryside. Explore the nearby Illinois State University campus, or take a scenic drive through the picturesque landscapes of the region. This is more than just a rental; it's an opportunity to experience the unique blend of small-town charm and extraterrestrial wonder.",
-          "price": 190.00
-        },
-        {
-          "ownerId": 4,
-          "address": "100 Pine Lane",
-          "city": "Lincoln",
-          "state": "NE",
-          "country": "United States of America",
-          "lat": 40.8037,
-          "lng": -96.6806,
-          "name": "The Lincoln Maize Mansion",
-          "description": "Discover the grandeur of this converted corn-shaped UFO, located in the heart of Lincoln, Nebraska. This spacious rental offers a luxurious blend of alien elegance and modern comfort. The interior design features high ceilings, polished concrete floors, and original alien artwork. The living area is expansive and inviting, with plush seating and a state-of-the-art entertainment system. The bedrooms are designed for ultimate relaxation, with king-size beds and spa-like bathrooms. The fully equipped kitchen boasts gourmet appliances and a large island, perfect for entertaining. Outside, a private patio offers stunning views of the city skyline. Explore the nearby University of Nebraska-Lincoln campus, or take a stroll through the charming downtown area. This is more than just a rental; it's an opportunity to experience the unique blend of urban sophistication and extraterrestrial charm.",
-          "price": 250.00
-        },
-        {
-          "ownerId": 5,
-          "address": "200 Cedar Street",
-          "city": "Topeka",
-          "state": "KS",
-          "country": "United States of America",
-          "lat": 39.0481,
-          "lng": -95.6780,
-          "name": "The Topeka Cob Crash Pad",
-          "description": "Experience the charm of Topeka, Kansas, in this uniquely converted corn-shaped UFO. This rental offers a cozy and inviting atmosphere, perfect for a relaxing getaway. The interior design features rustic wood accents and warm, inviting colors. The living area is comfortable and inviting, with plush seating and a fireplace. The bedrooms are designed for ultimate comfort, with comfortable beds and ample storage space. The fully equipped kitchen boasts modern appliances and all the cookware you need to prepare delicious meals. Outside, a spacious deck offers stunning views of the surrounding countryside. Explore the nearby Kansas State Capitol building, or take a stroll through the charming downtown area. This is more than just a rental; it's an opportunity to experience the unique blend of small-town charm and extraterrestrial wonder. And also, this is one of the closest crash sites to the geographical center of the US.",
-          "price": 170.00
-        },
-        {
-          "ownerId": 6,
-          "address": "300 Birch Avenue",
-          "city": "Indianapolis",
-          "state": "IN",
-          "country": "United States of America",
-          "lat": 39.7684,
-          "lng": -86.1581,
-          "name": "The Indianapolis Kernel Keep",
-          "description": "Discover the vibrant city of Indianapolis from this uniquely converted corn-shaped UFO. This rental offers a stylish and modern atmosphere, perfect for a city getaway. The interior design features sleek lines, polished surfaces, and original alien artwork. The living area is spacious and inviting, with plush seating and a state-of-the-art entertainment system. The bedrooms are designed for ultimate relaxation, with comfortable beds and spa-like bathrooms. The fully equipped kitchen boasts gourmet appliances and a large island, perfect for entertaining. Outside, a private balcony offers stunning views of the city skyline. Explore the nearby Indianapolis Motor Speedway, or take a stroll through the charming downtown area. This is more than just a rental; it's an opportunity to experience the unique blend of urban excitement and extraterrestrial charm.",
-          "price": 230.00
-        },
-        {
-          "ownerId": 7,
-          "address": "400 Maple Street",
-          "city": "Columbus",
-          "state": "OH",
-          "country": "United States of America",
-          "lat": 39.9612,
-          "lng": -82.9988,
-          "name": "The Columbus Corn Crib",
-          "description": "Experience the unique blend of urban and rural in Columbus, Ohio, from this wonderfully converted corn-shaped UFO. This rental offers a comfortable and inviting atmosphere, perfect for a relaxing getaway. The interior design features rustic wood accents and warm, inviting colors. The living area is cozy and inviting, with plush seating and a fireplace. The bedrooms are designed for ultimate comfort, with comfortable beds and ample storage space. The fully equipped kitchen boasts modern appliances and all the cookware you need to prepare delicious meals. Outside, a spacious deck offers stunning views of the surrounding countryside. Explore the nearby Ohio State University campus, or take a stroll through the charming downtown area. This is more than just a rental; it's an opportunity to experience the unique blend of city life and extraterrestrial wonder.",
-          "price": 200.00
-        },
-        {
-          "ownerId": 8,
-          "address": "500 Walnut Avenue",
-          "city": "Nashville",
-          "state": "TN",
-          "country": "United States
-        },
+                      {
+                        ownerId: 1,
+                        address: "123 Kernel Kove Rd, Roachdale, IN 46172",
+                        city: "Roachdale",
+                        state: "IN",
+                        country: "United States of America",
+                        lat: 39.8667,
+                        lng: -86.8778,
+                        name: "The Buttered Beacon",
+                        description: "Welcome to the Buttered Beacon, a genuine crashed Corn-Ship from the planet Maize-7. Our guests report hearing faint popping noises at night, believed to be residual energy from the ship's hyper-pop drive. The aliens, known as the 'Kernels,' were obsessed with butter, leaving behind vats of it in the cargo hold (now the guest bathroom). Legend says if you whisper sweet nothings to the control panel, it'll dispense warm, melted butter. Don't believe us? Try it! Unicorn Landing, where the corniest dreams come true.",
+                        price: 120.00
+                      },
+                      {
+                        ownerId: 2,
+                        address: "17 Silo Sight Ln, Guide Rock, NE 68942",
+                        city: "Guide Rock",
+                        state: "NE",
+                        country: "United States of America",
+                        lat: 40.1281,
+                        lng: -98.5133,
+                        name: "The Shucked Sanctuary",
+                        description: "The Shucked Sanctuary is a crashed Corn-Ship where the Kernels practiced their bizarre 'Husk-Fu' martial art. You'll find training dummies made of dried corn husks in the backyard. Guests have reported seeing spectral husks floating through the ship, believed to be the ghosts of Kernels practicing their forms. The main bedroom was their meditation chamber, and if you meditate long enough, you might receive visions of the Great Corn God. Unicorn Landing invites you to experience truly alien relaxation.",
+                        price: 110.00
+                      },
+                      {
+                        ownerId: 3,
+                        address: "99 Cob Crash Ct, Lebanon, KS 66952",
+                        city: "Lebanon",
+                        state: "KS",
+                        country: "United States of America",
+                        lat: 39.8164,
+                        lng: -98.5583,
+                        name: "The Golden Grain Glitch",
+                        description: "The Golden Grain Glitch is a Corn-Ship that crashed due to a malfunction in its 'Corn-GPS' system. The Kernels were attempting to deliver a giant ear of corn to their intergalactic corn festival. You'll find a giant, half-eaten corn cob in the living room, a testament to their failed mission. The ship's navigation system still tries to reroute you to Maize-7; don't be alarmed if the walls start displaying holographic cornfields. At Unicorn Landing, we embrace the glitches.",
+                        price: 130.00
+                      },
+                      {
+                        ownerId: 4,
+                        address: "23 Kernel Knoll Rd, Bowlus, MN 56314",
+                        city: "Bowlus",
+                        state: "MN",
+                        country: "United States of America",
+                        lat: 45.7483,
+                        lng: -94.3808,
+                        name: "The Sugary Stardust Suite",
+                        description: "The Sugary Stardust Suite was a Corn-Ship used for interstellar corn-baking competitions. The Kernels were obsessed with creating the perfect sweet corn muffin. The kitchen is still filled with alien baking tools and strange corn-based spices. Guests often find mysterious muffin recipes written in Kernel glyphs. The ship's gravity generator sometimes malfunctions, causing muffins to float. At Unicorn Landing, we believe in the magic of corn-flavored space-baking.",
+                        price: 140.00
+                      },
+                      {
+                        ownerId: 5,
+                        address: "56 Pop Top Pl, Tolstoy, SD 57475",
+                        city: "Tolstoy",
+                        state: "SD",
+                        country: "United States of America",
+                        lat: 45.1953,
+                        lng: -99.9678,
+                        name: "The Popping Planet Palace",
+                        description: "The Popping Planet Palace was a Corn-Ship used for Kernel corn-themed operas. The Kernels were known for their dramatic performances about the history of corn. The living room is still set up as a stage, with alien props and costumes. Guests often report hearing ghostly Kernel voices singing corn-themed arias. The ship’s lighting system is programmed to create dramatic corn-stalk shadows. Unicorn Landing, where the stage is always set for corn-tastic performances.",
+                        price: 125.00
+                      },
+                      {
+                        ownerId: 6,
+                        address: "81 Maize Maze Dr, Bevington, IA 50033",
+                        city: "Bevington",
+                        state: "IA",
+                        country: "United States of America",
+                        lat: 41.3789,
+                        lng: -93.7917,
+                        name: "The Kernel Kaleidoscope",
+                        description: "The Kernel Kaleidoscope crashed while the Kernels were attempting to create a corn-themed amusement park. The ship's holographic projectors still display rides like the 'Corn Cob Coaster' and the 'Butter Churn Bumper Cars.' Guests have reported feeling phantom g-forces while watching the holographic rides. The ship's control panel still dispenses tickets, though they're only valid for interdimensional corn-rides. At Unicorn Landing, we bring the corn carnival to you.",
+                        price: 135.00
+                      },
+                      {
+                        ownerId: 7,
+                        address: "37 Husk Hideaway Rd, Rapelje, MT 59072",
+                        city: "Rapelje",
+                        state: "MT",
+                        country: "United States of America",
+                        lat: 46.1017,
+                        lng: -109.5292,
+                        name: "The Silken Starlight Sanctuary",
+                        description: "The Silken Starlight Sanctuary was a Corn-Ship used as a Kernel spa. The Kernels believed corn silk had healing properties. You’ll find vats of corn silk-infused lotions and potions in the bathrooms. Guests have reported feeling unusually relaxed after staying here, and some claim their hair has taken on a golden hue. The ship's aromatherapy system still dispenses corn silk-scented mist. Unicorn Landing, where relaxation is always corn-silk smooth.",
+                        price: 150.00
+                      },
+                      {
+                        ownerId: 8,
+                        address: "68 Cob Corner Ln, Emblem, WY 82422",
+                        city: "Emblem",
+                        state: "WY",
+                        country: "United States of America",
+                        lat: 44.5822,
+                        lng: -108.5756,
+                        name: "The Popped Pinnacle Pad",
+                        description: "The Popped Pinnacle Pad was a Corn-Ship used as a Kernel mountain retreat. The Kernels loved to hike and explore the mountains, leaving behind corn-shaped hiking boots and maps. Guests have reported seeing Kernel ghosts climbing the nearby hills, carrying corn-shaped walking sticks. The ship's telescope is still calibrated to view Maize-7, but only on clear nights. At Unicorn Landing, we reach for the corn-shaped stars.",
+                        price: 145.00
+                      },
+                      {
+                        ownerId: 9,
+                        address: "12 Maize Meadow Rd, McHenry, ND 58464",
+                        city: "McHenry",
+                        state: "ND",
+                        country: "United States of America",
+                        lat: 47.6447,
+                        lng: -98.7917,
+                        name: "The Grainy Galaxy Getaway",
+                        description: "The Grainy Galaxy Getaway was a Corn-Ship used for Kernel stargazing. The Kernels were fascinated by the constellations, especially those that resembled corn. The ship's observatory is still functional, and guests have reported seeing strange corn-shaped constellations. The ship's communication system occasionally receives messages from Maize-7, though they're always in Kernel code. At Unicorn Landing, we explore the corn-shaped universe.",
+                        price: 130.00
+                      },
+                        {
+                          ownerId: 10,
+                          address: "45 Kernel Karavan Rd, Tendoy, ID 83468",
+                          city: "Tendoy",
+                          state: "ID",
+                          country: "United States of America",
+                          lat: 44.7556,
+                          lng: -113.8833,
+                          name: "The Golden Grain Grandeur",
+                          description: "The Golden Grain Grandeur was a luxury Corn-Ship used by Kernel royalty. The Kernels of Maize-7 had a very complex class system and this ship belonged to the highest class of Kernels. You'll find ornate corn-silk tapestries and golden corn-kernel mosaics throughout the ship. Guests have reported feeling a sense of regal presence, and some claim to have seen Kernel ghosts in fancy corn-silk robes. The ship's dining hall still features a giant corn-shaped chandelier. At Unicorn Landing, we treat you like corn royalty.",
+                          price: 160.00
+                        },
+                        {
+                          ownerId: 11,
+                          address: "72 Husk Haven Hwy, Shaniko, OR 97057",
+                          city: "Shaniko",
+                          state: "OR",
+                          country: "United States of America",
+                          lat: 45.0061,
+                          lng: -120.7519,
+                          name: "The Shucked Serenity Suite",
+                          description: "The Shucked Serenity Suite was a Corn-Ship used as a Kernel retreat for relaxation. The Kernels of Maize-7 were very stressed out and needed to be able to relax. You'll find meditation cushions made of corn husks and calming corn-silk incense burners throughout the ship. Guests have reported feeling incredibly peaceful and rejuvenated after staying here, and some claim to have heard Kernel chants in the wind. The ship's zen garden still features a corn-shaped fountain. Unicorn Landing, where serenity is always in season.",
+                          price: 155.00
+                        },
+                        {
+                          ownerId: 12,
+                          address: "29 Cob Corner Cir, Vina, CA 95992",
+                          city: "Vina",
+                          state: "CA",
+                          country: "United States of America",
+                          lat: 39.9575,
+                          lng: -122.0289,
+                          name: "The Popped Paradise Pad",
+                          description: "The Popped Paradise Pad was a Corn-Ship used for Kernel vacations. The Kernels of Maize-7 loved to travel. You'll find postcards from various corn-themed planets and souvenirs made of corn throughout the ship. Guests have reported feeling a sense of wanderlust and adventure after staying here, and some claim to have seen Kernel ghosts in Hawaiian shirts. The ship's entertainment system still plays corn-themed music. At Unicorn Landing, we take you on a corn-tastic getaway.",
+                          price: 170.00
+                        },
+                        {
+                          ownerId: 13,
+                          address: "56 Maize Maze Manor, Skull Valley, AZ 86338",
+                          city: "Skull Valley",
+                          state: "AZ",
+                          country: "United States of America",
+                          lat: 34.5442,
+                          lng: -112.7844,
+                          name: "The Silken Starlight Sanctuary",
+                          description: "The Silken Starlight Sanctuary was a Corn-Ship used as a Kernel observatory. The Kernels of Maize-7 were very interested in space. You'll find powerful telescopes and star charts made of corn silk throughout the ship. Guests have reported seeing strange corn-shaped constellations and feeling a connection to the universe after staying here, and some claim to have seen Kernel ghosts in astronaut suits. The ship's navigation system still tries to plot a course to Maize-7. Unicorn Landing, where the stars are always corn-shaped.",
+                          price: 165.00
+                        }
+
     ], { validate: true });
   },
 

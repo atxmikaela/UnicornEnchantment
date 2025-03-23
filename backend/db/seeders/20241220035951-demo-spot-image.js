@@ -13,19 +13,331 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: 'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTJO_TYDsdas_w6ESbzv11SNR2YBBFV7FU1RtLJb2hZfuVbtKRlUpuKLxF8RMpBHBP2WZtY8aQ3ZiQdNbiGKEKJC864KhD7FWYpZObv6uc',
+        url: '/1_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 1,
+        url: '/1_5.jpg',
         preview: true
       },
       {
         spotId: 2,
-        url: 'https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTZonKlXXY8hdeQRA2FJPlSnMqwOxgpT6xrD7_crz8BQXzHirgfrHzI-7RXCyyUJ1pea60Cv9QU2F5RWGa5O-a29JPAlYY9leJW_uw5-Q',
+        url: '/2_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 2,
+        url: '/1_5.jpg',
         preview: true
       },
       {
         spotId: 3,
-        url: 'https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcSPoDsjyAiWSP_EXRu-JnsrTKBzPjy26RIG5ETXcZSGBFA9Wa4RcuOvgbYcpSXrw4kXpub5en0v8J7LYHohoRPo5AARfiwaIfe-khxCOA',
-        preview: false
-      }
+        url: '/3_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 3,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: '/4_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 4,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: '/5_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 5,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: '/6_1.png',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 6,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: '/7_1.png',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 7,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: '/1_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 8,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: '/2_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 9,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: '/3_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 10,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: '/4_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 11,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '/5_1.jpg',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 12,
+        url: '/1_5.jpg',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '/6_1.png',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '/1_2.jpg',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '/1_3.jpg',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '/1_4.jpg',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: '/1_5.jpg',
+        preview: true
+      },
+
+
     ], { validate: true });
   },
 
