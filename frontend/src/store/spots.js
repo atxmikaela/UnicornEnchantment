@@ -16,24 +16,25 @@ export const getAllSpotsAction = (spots) => {
 
 // THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
 export const getSpotsThunk = () => async (dispatch) => {
-  try {
+
     const res = await csrfFetch("/api/spots");
     if (res.ok) {
       const data = await res.json();
       dispatch(getAllSpotsAction(data.Spots));
     } else {
       const errorData = await res.json();
+      return errorData;
     }
-  } catch (error) {}
+
 };
 
 // step 7
 // normalizing our state
 
-const initialStateSpots = {
-  allSpots: [],
-  byId: {},
-};
+// const initialStateSpots = {
+//   allSpots: [],
+//   byId: {},
+// };
 
 const initialState = {};
 

@@ -25,8 +25,9 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
       dispatch(getSpotAction(data));
     } else {
       const errorData = await res.json();
+      return errorData;
     }
-  } catch (error) {}
+  } catch (error) {return}
 };
 
 // step 7
