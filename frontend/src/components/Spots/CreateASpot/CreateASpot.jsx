@@ -1,8 +1,9 @@
-// import { useState } from 'react';
 // import { useDispatch } from 'react-redux';
+// import { useState } from 'react';
 
+// let content;
 
-// function createASpot () {
+// function CreateASpot () {
 //   const dispatch = useDispatch();
 //   const [country, setCountry] = useState("");
 //   const [address, setAddress] = useState("");
@@ -60,17 +61,7 @@
 //     return setErrors({
 //     });
 //   };
-  // const typeCheck = { previewImage, firstSpotImg, secondSpotImg, thirdSpotImg, fourthSpotImg }
-  // const checkLastThree = () => {
-
-  //   const lastThree = typeCheck.slice(-3);
-  //   const validImages = []
-
-  //   last
-  //   for (photo of photos) {
-
-  //   }
-  // }
+//
 
 //   return (
 //     <>
@@ -162,7 +153,7 @@
 //           Preview Image  {errors.previewImage && <p>{errors.previewImage}</p>}
 //           <input
 //             type="text"
-//             value={previewImage}
+//             value={imageUrl1}
 //             onChange={(e) => setPreviewImage(e.target.value)}
 //             required
 //           />
@@ -211,6 +202,8 @@
 //   );
 // }
 const CreateASpot = () => {
-  
+
 }
+
+
 export default CreateASpot;

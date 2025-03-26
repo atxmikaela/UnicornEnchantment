@@ -11,6 +11,7 @@ import UpdateSpot from './components/Spots/UpdateSpot';
 import ManageReviews from './components/Reviews/ManageReviews';
 import Splash from './components/Splash';
 import SpotDetail from './components/SpotDetail';
+import MockASpot from './components/Spots/MockASpot';
 
 
 function Layout() {
@@ -53,8 +54,12 @@ const router = createBrowserRouter([
         element: <SpotDetail />
       },
       {
-        path: "/create",
+        path: "/spots/new",
         element: <CreateASpot />
+      },
+      {
+        path: "/spots/mock",
+        element: <MockASpot />
       },
       {
         path: "spots/current",
