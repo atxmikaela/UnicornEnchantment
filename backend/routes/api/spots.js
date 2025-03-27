@@ -20,12 +20,12 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .withMessage("Country is required"), // 400
   body("lat")
-    .exists({ checkFalsy: true })
+    .optional({ nullable: true })
     .isFloat({ min: -90, max: 90 })
     .withMessage("Latitude must be within -90 and 90")
     .toFloat(),
   body("lng")
-    .exists({ checkFalsy: true })
+    .optional({ nullable: true })
     .isFloat({ min: -180, max: 180 })
     .withMessage("Longitude must be within -180 and 180")
     .toFloat(),
@@ -434,8 +434,10 @@ router.post("/:spotId/images", requireAuth, async (req, res) => {
 
 router.post("/", requireAuth, validateSpot, async (req, res, next) => {
   const ownerId = req.user.id;
-  const { address, city, state, country, lat, lng, name, description, price } =
+  const { address, city, state, country, lat, lng, name, description, price, previewImage, firstSpotImg, secondSpotImg, thirdSpotImg, fourthSpotImg } =
     req.body;
+
+
   try {
     const newSpot = await Spot.create({
       ownerId,
@@ -450,8 +452,27 @@ router.post("/", requireAuth, validateSpot, async (req, res, next) => {
       price,
     });
 
+    if(previewImage){
+
+      await SpotImage.create({spotId: newSpot.id, url: previewImage, preview: true});
+  }
+  if(firstSpotImg){
+
+      await SpotImage.create({spotId: newSpot.id, url: firstSpotImg, preview: false});
+  }
+  if(secondSpotImg){
+      await SpotImage.create({spotId: newSpot.id, url: secondSpotImg, preview: false});
+  }
+  if(thirdSpotImg){
+      await SpotImage.create({spotId: newSpot.id, url: thirdSpotImg, preview: false});
+  }
+  if(fourthSpotImg){
+      await SpotImage.create({spotId: newSpot.id, url: fourthSpotImg, preview: false});
+  }
+
     res.status(201).json(newSpot);
   } catch (error) {
+    console.error("Error creating spot:", error);
     next(error);
   }
 });
