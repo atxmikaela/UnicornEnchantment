@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle, FaBars } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -43,8 +43,10 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+
+      <button class="toggle-button" onClick={toggleMenu}>
+      <FaBars size='18' style={{ marginRight: '2px', paddingLeft: '2px' }} />
+      <FaUserCircle size='20' style={{ marginLeft: '2px' }} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
@@ -57,7 +59,7 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <>
+          <div class='menu-box'>
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}
@@ -68,7 +70,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-          </>
+          </div>
         )}
       </ul>
     </>

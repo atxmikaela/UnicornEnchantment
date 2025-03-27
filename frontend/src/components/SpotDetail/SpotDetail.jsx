@@ -56,6 +56,12 @@ const SpotDetail = () => {
       return formattedDate;
   }
 
+    function ratingCheck (avgRating) {
+        if (avgRating !== null) {
+            return `star ${spot.avgStarRating.toFixed(1)} - ${spot.numReviews} reviews`;
+        } return "No Reviews Yet";
+    }
+
     if (!isLoaded || !spot) {
         return (
             <img
@@ -88,10 +94,10 @@ const SpotDetail = () => {
                         <span className='price-reviews'>
                             <h1>${spot.price.toFixed(2)} </h1>
                             <h3>night</h3>
-                            <h3> star {spot.avgStarRating.toFixed(1)} - {spot.numReviews} reviews</h3>
+                            <h3>{ratingCheck(spot.avgStarRating)}</h3>
                         </span>
                     </div>
-                    <h1>star {spot.avgStarRating.toFixed(1)} - {spot.numReviews} reviews</h1>
+                    <h1>{ratingCheck(spot.avgStarRating)}</h1>
                     {}
                     {reviews && Object.values(reviews).map((review) => (
                         <div key={review.id}>

@@ -1,0 +1,35 @@
+
+a {
+    text-decoration: none;
+    color: rgb(9, 62, 57);
+    display: flex;
+  }
+
+  .nav-menu-wrapper{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.0rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+
+}
+
+.logo_wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width:80px;
+    height:80px;
+}
+
+.login-wrapper {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+
+}

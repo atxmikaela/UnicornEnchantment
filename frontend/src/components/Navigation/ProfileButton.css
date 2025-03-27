@@ -1,3 +1,14 @@
 .hidden{
     visibility: hidden;
 }
+
+.toggle-button{
+    width: 66px;
+    height: 33px;
+    border-radius: 25px;
+}
+.profile-dropdown{
+    top: 50px;
+    left: 100%;
+}
+
