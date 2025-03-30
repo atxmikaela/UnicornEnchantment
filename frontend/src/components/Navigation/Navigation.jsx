@@ -8,32 +8,26 @@ function Navigation({ isLoaded }) {
 
   return (
     <>
+      <div className="nav-menu-wrapper">
+
+        <div className="logo-wrapper">
+          <h3><NavLink to="/"><img src="/UBNB.png" className="logo" alt="UBNB Logo" />Unicorn BnB</NavLink></h3>
+        </div>
 
 
-    <div className="nav-menu-wrapper">
+        <div className="login-wrapper">
+          <NavLink>Create a New Cornhole</NavLink>
 
 
-
-      <div className="logo-wrapper">
-      <h3><NavLink to="/"><img src="/UBNB.png" className="logo" alt="UBNB Logo" />Unicorn BnB</NavLink></h3>
+          <ul>
+            {isLoaded && (
+              <li>
+                <ProfileButton user={sessionUser} />
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
-
-
-
-    <div className="login-wrapper">
-    <ul>
-
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
-        </li>
-      )}
-    </ul>
-
-    </div>
-    </div>
-
-
     </>
   );
 }

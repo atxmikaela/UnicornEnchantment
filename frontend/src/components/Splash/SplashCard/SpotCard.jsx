@@ -3,9 +3,10 @@ import './SpotCard.css';
 
 export default function SpotCard ({spot}) {
 
+  let avgRating2d;
 
 if (spot.avgRating !== null) {
-  spot.avgRating = spot.avgRating
+  avgRating2d = spot.avgRating
 } else {
   spot.avgRating = "New";
 }
@@ -20,7 +21,7 @@ if (spot.avgRating !== null) {
       </div>
       <div className='title-container spot-text'>
         <span>{`${spot.city}, ${spot.state}`} </span>
-        <span>{`${spot.avgRating}`} </span>
+        <span>{`${avgRating2d.toFixed(2)}`} </span>
       </div>
 
       <div className='address-dates-container'>
