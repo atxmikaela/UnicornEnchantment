@@ -35,17 +35,12 @@ function ProfileButton({ user }) {
 
   const closeMenu = () => setShowMenu(false);
 
-  // const clearCookies = () => {
-  //   document.cookie = "XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  //   document.cookie = "_csrf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  //   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  // };
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
-    clearCookies();
+
     navigate('/');
   };
 
