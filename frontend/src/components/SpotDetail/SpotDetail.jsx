@@ -11,7 +11,7 @@ const SpotDetail = () => {
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spotReducer.byId ? state.spotReducer.byId[id] : null);
     const reviews = useSelector((state) => state.reviewsReducer.byId);
-    ("Reviews from Redux:", reviews);
+    ("Reviews:", reviews);
     const [isLoaded, setIsLoaded] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [detailImages, setDetailImages] = useState([]);

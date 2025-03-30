@@ -5,11 +5,11 @@ import SpotCard from "./SplashCard";
 import { useNavigate } from 'react-router-dom';
 import './Splash.css';
 
+console.log("Just seeing if this commits")
+
 const Splash = () => {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
-
 
   const spots = useSelector((state) => state.spotsReducer.allSpots);
   const [isLoaded, setIsLoaded] = useState(false);

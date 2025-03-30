@@ -10,17 +10,17 @@ function Navigation({ isLoaded }) {
     <>
 
 
-    <div class ="nav-menu-wrapper">
+    <div className="nav-menu-wrapper">
 
 
 
-      <div class="logo-wrapper">
-      <h3><NavLink to="/"><img src="/UBNB.png" class="logo" alt="UBNB Logo" />Unicorn BnB</NavLink></h3>
+      <div className="logo-wrapper">
+      <h3><NavLink to="/"><img src="/UBNB.png" className="logo" alt="UBNB Logo" />Unicorn BnB</NavLink></h3>
       </div>
 
 
 
-    <div class="login-wrapper">
+    <div className="login-wrapper">
     <ul>
 
       {isLoaded && (

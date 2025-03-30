@@ -44,7 +44,7 @@ function ProfileButton({ user }) {
   return (
     <>
 
-      <button class="toggle-button" onClick={toggleMenu}>
+      <button className="toggle-button" onClick={toggleMenu}>
       <FaBars size='18' style={{ marginRight: '2px', paddingLeft: '2px' }} />
       <FaUserCircle size='20' style={{ marginLeft: '2px' }} />
       </button>
@@ -59,7 +59,7 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <div class='menu-box'>
+          <div className='menu-box'>
             <OpenModalMenuItem
               itemText="Log In"
               onItemClick={closeMenu}

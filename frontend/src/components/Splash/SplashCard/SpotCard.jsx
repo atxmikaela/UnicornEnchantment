@@ -1,7 +1,10 @@
 import './SpotCard.css';
 
 
-const SpotCard = ({spot}) => {
+export default function SpotCard ({spot}) {
+
+
+
   return (
     <div className="card-container">
       <div className='spot-image-container'>
@@ -9,7 +12,7 @@ const SpotCard = ({spot}) => {
       </div>
       <div className='title-container spot-text'>
         <span>{`${spot.city}, ${spot.state}`} </span>
-        <span>{`${spot.avgRating}`} </span>
+        <span>{`${spot.averageRating}`} </span>
       </div>
 
       <div className='address-dates-container'>
@@ -26,4 +29,3 @@ const SpotCard = ({spot}) => {
 </div>
       )
     }
-      export default SpotCard;

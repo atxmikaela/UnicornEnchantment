@@ -153,6 +153,13 @@ module.exports = {
         firstName: "Summit",
         lastName: "Cobridge",
         hashedPassword: bcrypt.hashSync('password3')
+      },
+      {
+        email: "demouser@cornhole.io",
+        username: "demo",
+        firstName: "probe",
+        lastName: "ation",
+        hashedPassword: bcrypt.hashSync('demoPassword')
       }
 
     ], { validate: true });
