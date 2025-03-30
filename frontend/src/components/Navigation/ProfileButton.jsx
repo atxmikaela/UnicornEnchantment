@@ -5,15 +5,17 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { useNavigate, NavLink } from 'react-router-dom';
 import "./ProfileButton.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const navigate = useNavigate();
 
   const toggleMenu = (e) => {
-    e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    e.stopPropagation();
     setShowMenu(!showMenu);
   };
 
@@ -33,29 +35,40 @@ function ProfileButton({ user }) {
 
   const closeMenu = () => setShowMenu(false);
 
+  // const clearCookies = () => {
+  //   document.cookie = "XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  //   document.cookie = "_csrf=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  //   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  // };
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    clearCookies();
+    navigate('/');
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+
+
   return (
     <>
-
+      <div className='toggle-wrapper'>
       <button className="toggle-button" onClick={toggleMenu}>
       <FaBars size='18' style={{ marginRight: '2px', paddingLeft: '2px' }} />
       <FaUserCircle size='20' style={{ marginLeft: '2px' }} />
       </button>
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+            <li>Hello, {user.firstName[0].toUpperCase() + user.firstName.slice(1)}</li>
             <li>{user.email}</li>
+            <li><NavLink to="/spots/current">Manage Spots</NavLink></li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className="login-logout-button" onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
@@ -73,6 +86,7 @@ function ProfileButton({ user }) {
           </div>
         )}
       </ul>
+      </div>
     </>
   );
 }

@@ -93,7 +93,7 @@ const CreateASpot = () => {
 
   return (
     <div className='inputBox'>
-      <h1>Create a new Spot</h1>
+      <h1>Create a new Cornhole</h1>
       <h2>Where&apos;s your place located?</h2>
       <p>Guests will only get your exact address once they booked a reservation</p>
       <form onSubmit={handleSubmit}>

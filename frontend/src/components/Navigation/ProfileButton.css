@@ -1,14 +1,47 @@
 .hidden{
     visibility: hidden;
+
+}
+
+.li {
+    padding-top: 50px;
+}
+
+.toggle-wrapper{
+    position: relative;
+
+
+}
+
+
+.toggle-button-div{
+
+    display:flex;
+    align-items: center;
 }
 
 .toggle-button{
+
     width: 66px;
     height: 33px;
     border-radius: 25px;
 }
+
+
+
 .profile-dropdown{
-    top: 50px;
-    left: 100%;
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 150%;
+    right: 80%;
+    width: 200px;
 }
 
+
+
+.login-logout-button {
+    border-radius: 25px;
+}
