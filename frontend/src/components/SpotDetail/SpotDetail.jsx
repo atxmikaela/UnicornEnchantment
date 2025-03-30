@@ -22,7 +22,7 @@ const SpotDetail = () => {
             setIsLoaded(true);
         };
         const getReviews = async () => {
-          await dispatch(getReviewsThunk(id));
+            await dispatch(getReviewsThunk(id));
         }
 
         if (!isLoaded) {
@@ -43,24 +43,28 @@ const SpotDetail = () => {
         }
     }, [spot]);
 
-    function timestampToMonthYear(timestamp) {
-      const date = new Date(timestamp);
-      const monthIndex = date.getMonth();
-      const year = date.getFullYear();
-      const monthNames = [
-          "January", "February", "March", "April", "May", "June",
-          "July", "August", "September", "October", "November", "December"
-      ];
-      const monthName = monthNames[monthIndex];
-      const formattedDate = `${monthName} ${year}`;
-      return formattedDate;
-  }
 
-    function ratingCheck (avgRating) {
-        if (avgRating !== null) {
-            return `star ${spot.avgStarRating.toFixed(1)} - ${spot.numReviews} reviews`;
-        } return "No Reviews Yet";
+
+    function timestampToMonthYear(timestamp) {
+        const date = new Date(timestamp);
+        const monthIndex = date.getMonth();
+        const year = date.getFullYear();
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = monthNames[monthIndex];
+        const formattedDate = `${monthName} ${year}`;
+        return formattedDate;
     }
+
+    function ratingCheck(avgRating) {
+        if (avgRating !== null) {
+            return `★${spot.avgStarRating} - ${spot.numReviews} reviews`;
+        } return "New";
+    }
+
+    const areThereReviews = reviews && Object.keys(reviews).length > 0;
 
     if (!isLoaded || !spot) {
         return (
@@ -97,15 +101,33 @@ const SpotDetail = () => {
                             <h3>{ratingCheck(spot.avgStarRating)}</h3>
                         </span>
                     </div>
-                    <h1>{ratingCheck(spot.avgStarRating)}</h1>
-                    {}
-                    {reviews && Object.values(reviews).map((review) => (
-                        <div key={review.id}>
-                            <h3>{review.User.firstName}</h3>
-                            <p>{timestampToMonthYear(review.createdAt)}</p>
-                            <p>{review.review}</p>
+
+                    {areThereReviews ? (
+
+                        <div className='ratingsWrapper'>
+                            <h1>{ratingCheck(spot.avgStarRating)}</h1>
+                            { }
+                            {reviews && Object.values(reviews).map((review) => (
+                                <div key={review.id}>
+                                    <h3>{review.User.firstName}</h3>
+                                    <p>{timestampToMonthYear(review.createdAt)}</p>
+                                    <p>{review.review}</p>
+
+                                </div>
+                            ))}
                         </div>
-                    ))}
+
+                    ) : (
+
+                        <div className='noRatingsWrapper'>
+                            <h1>Be the first to post a review</h1>
+                        </div>
+
+
+
+
+                    )
+                    }
                 </div>
             </div>
         );

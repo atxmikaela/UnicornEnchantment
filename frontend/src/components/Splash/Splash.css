@@ -16,10 +16,12 @@
 
 }
 
+
 .card-container{
     cursor: pointer;
 
 }
+
 
 .title-container{
     display: flex;

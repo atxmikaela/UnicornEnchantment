@@ -42,29 +42,25 @@ export const getSpotThunk = (spotId) => async (dispatch) => {
 
 
 export const addSpotThunk = (spot) => async (dispatch) => {
-    const { country, address, city, state, lat, lng, description, name, price, previewImage, firstSpotImg, secondSpotImg, thirdSpotImg, fourthSpotImg } = spot;
-    try{
+
     const response = await csrfFetch("/api/spots", {
       method: "POST",
-      body: JSON.stringify({
-        country, address, city, state, lat, lng, description, name, price, previewImage, firstSpotImg, secondSpotImg, thirdSpotImg, fourthSpotImg
-      })
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(spot)
     });
+
     if (response.ok) {
     const data = await response.json();
-    dispatch(addSpot(data))
-    console.log("MOTHERFUCKER JONES", data);
+    dispatch(addSpot(data));
     return data;
 
 } else {
-    const errorData = await response.json();
-    console.log("Error creating spot", errorData);
-    return errorData
+    const error = await response.json();
+    return Promise.reject(error);
 }
-    } catch (error) {
-      console.log('what were you thunkin', error);
-      return error;
-    }
+
   };
 
 // step 7

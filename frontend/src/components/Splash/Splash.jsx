@@ -12,6 +12,7 @@ const Splash = () => {
   const spots = useSelector((state) => state.spotsReducer.allSpots);
   const [isLoaded, setIsLoaded] = useState(false);
 
+
   useEffect(() => {
     const getSpots = async () => {
       await dispatch(getSpotsThunk());

@@ -21,7 +21,7 @@ if (spot.avgRating !== null) {
       </div>
       <div className='title-container spot-text'>
         <span>{`${spot.city}, ${spot.state}`} </span>
-        <span>{`${avgRating2d.toFixed(2)}`} </span>
+        <span>{`${avgRating2d}`} </span>
       </div>
 
       <div className='address-dates-container'>

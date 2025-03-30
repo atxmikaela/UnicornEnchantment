@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addSpotThunk } from '../../../store/spot';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -15,134 +16,181 @@ const CreateASpot = () => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [previewImage, setPreviewImage] = useState([]);
-  const [firstSpotImg, setFirstSpotImg] = useState([]);
-  const [secondSpotImg, setSecondSpotImg] = useState([]);
-  const [thirdSpotImg, setThirdSpotImg] = useState([]);
-  const [fourthSpotImg, setFourthSpotImg] = useState([]);
+  const [previewImage, setPreviewImage] = useState("");
+  const [firstSpotImg, setFirstSpotImg] = useState("");
+  const [secondSpotImg, setSecondSpotImg] = useState("");
+  const [thirdSpotImg, setThirdSpotImg] = useState("");
+  const [fourthSpotImg, setFourthSpotImg] = useState("");
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-
-
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const spot ={
-      country,
-      address,
-      city,
-      state,
-      lat,
-      lng,
-      description,
-      name,
-      price,
-      previewImage,
-      firstSpotImg,
-      secondSpotImg,
-      thirdSpotImg,
-      fourthSpotImg,
-    };
+    const newErrors = {};
+    const imageRegex = /\.(png|jpe?g)$/i;
 
-    dispatch(addSpotThunk(spot));
-    reset();
+    if (!country) {
+      newErrors.country = 'Country is required';
+    }
+
+    if (!address) {
+      newErrors.address = 'Street is required';
+    }
+
+    if (!city) {
+      newErrors.city = 'City is required';
+    }
+
+    if (!state) {
+      newErrors.state = 'State is required';
+    }
+
+    if (!lat) {
+      newErrors.lat = 'Latitude is required';
+    }
+
+    if (!lng) {
+      newErrors.lng = 'Longitude is required';
+    }
+
+    if (description.length < 30) {
+      newErrors.description = 'Description needs a minimum of 30 characters';
+    }
+
+    if (!name) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!price) {
+      newErrors.price = 'Price is required';
+    }
+
+    if (!previewImage) {
+      newErrors.previewImage = 'Preview Image is required';
+    } else if (previewImage && !imageRegex.test(previewImage)) {
+      newErrors.previewImage = 'Image URL must end in png, jpg, or jpeg';
+    }
+
+    if (firstSpotImg && !imageRegex.test(firstSpotImg)) {
+      newErrors.firstSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    }
+
+    if (secondSpotImg && !imageRegex.test(secondSpotImg)) {
+      newErrors.secondSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    }
+
+    if (thirdSpotImg && !imageRegex.test(thirdSpotImg)) {
+      newErrors.thirdSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    }
+
+    if (fourthSpotImg && !imageRegex.test(fourthSpotImg)) {
+      newErrors.fourthSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    }
+
+    setErrors(newErrors);
+
+
+
+
+    if (Object.keys(newErrors).length === 0) {
+      const spot = {
+        country,
+        address,
+        city,
+        state,
+        lat,
+        lng,
+        description,
+        name,
+        price,
+        previewImage,
+        firstSpotImg,
+        secondSpotImg,
+        thirdSpotImg,
+        fourthSpotImg,
+      }
+
+
+      dispatch(addSpotThunk(spot))
+      .then((data) => {
+        console.log("Created cornhole ID:", data.id);
+        reset();
+        navigate(`/spots/${data.id}`);
+      })
+      .catch((err) => {
+        console.error("Error creating cornhole:", err);
+      })
+    } else {
+      return;
+    }
   };
 
-    const reset = () => {
-      setCountry('');
-      setAddress('');
-      setCity('');
-      setState('');
-      setLat('')
-      setLng('');
-      setDescription('');
-      setName('');
-      setPrice('');
-      setPreviewImage('');
-      setFirstSpotImg('');
-      setSecondSpotImg('');
-      setThirdSpotImg('');
-      setFourthSpotImg('');
-    };
-
-    // if (country.length !== 0);
-    // else if (address.length !== 0);
-    // else if (city.length !== 0);
-    // else if (state.length !== 0);
-    // else if (description.length > 30);
-    // else if (name.length !== 0);
-    // else if (price.length !== 0);
-    // else if (previewImage.length !== 0) {
-    //       country,
-    //       address,
-    //       city,
-    //       state,
-    //       latitude,
-    //       longitude,
-    //       description,
-    //       name,
-    //       price,
-    //       previewImage,
-    //       firstSpotImg,
-    //       secondSpotImg,
-    //       thirdSpotImg,
-    //       fourthSpotImg
-    //     })
-
-
-
+  const reset = () => {
+    setCountry('');
+    setAddress('');
+    setCity('');
+    setState('');
+    setLat('')
+    setLng('');
+    setDescription('');
+    setName('');
+    setPrice('');
+    setPreviewImage('');
+    setFirstSpotImg('');
+    setSecondSpotImg('');
+    setThirdSpotImg('');
+    setFourthSpotImg('');
+  };
 
   return (
     <div className='inputBox'>
       <h1>Create a new Cornhole</h1>
-      <h2>Where&apos;s your place located?</h2>
+      <h2>Where&apos;s your cornhole located?</h2>
       <p>Guests will only get your exact address once they booked a reservation</p>
       <form onSubmit={handleSubmit}>
         <label>
-          <p>Country</p>
+        {errors.country && <div className="error-message">{errors.country}</div>}
           <input
             type="text"
             onChange={(e) => setCountry(e.target.value)}
             value={country}
             placeholder='Country'
             name='country'
-            required
           />
         </label>
         <label>
-          <p>Address</p>
+        <p></p>{errors.address && <div className="error-message">{errors.address}</div>}
           <input
             type="text"
             onChange={(e) => setAddress(e.target.value)}
             value={address}
             placeholder='Address'
             name='address'
-            required
           />
         </label>
         <label>
-          <p>City</p>
+        <p></p>{errors.city && <div className="error-message">{errors.city}</div>}
           <input
             type="text"
             onChange={(e) => setCity(e.target.value)}
             value={city}
             placeholder='City'
             name='city'
-            required
           />
         </label>
         <label>
-          <p>State</p>
+        <p></p>{errors.state && <div className="error-message">{errors.state}</div>}
           <input
             type="text"
             onChange={(e) => setState(e.target.value)}
             value={state}
             placeholder='STATE'
             name='state'
-            required
           />
         </label>
         <label>
-          <p>Latitude</p>
+        <p></p>{errors.latitude && <div className="error-message">{errors.latitude}</div>}
           <input
             type="text"
             onChange={(e) => setLat(e.target.value)}
@@ -152,7 +200,7 @@ const CreateASpot = () => {
           />
         </label>
         <label>
-        <p>Longitude</p>
+        <p></p>{errors.longitude && <div className="error-message">{errors.longitude}</div>}
           <input
             type="text"
             onChange={(e) => setLng(e.target.value)}
@@ -163,31 +211,32 @@ const CreateASpot = () => {
         </label>
         <label>
           <h2>Describe your place to guests</h2>
-          <p>Mention the best features of your space, any special amenities like fast wife or parking, and what you love about the neighborhood.</p>
+          <p>Mention the best features of your space, any special amenities like fast wife or parking, and what you love about the cornhood.</p>
+          {errors.description && <div className="error-message">{errors.description}</div>}
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             type="textarea"
             placeholder='Description'
             rows='6'
-            required
           />
         </label>
         <label>
           <h2>Create a title for your spot</h2>
-          <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
+          <p>Catch guests&apos; attention with a spot title that highlights what makes your cornhole special.</p>
+          {errors.name && <div className="error-message">{errors.name}</div>}
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
             placeholder='Name of your spot'
             name='name'
-            required
           />
         </label>
         <label>
           <h2>Set a base price for your spot</h2>
-          <p>Competitive pricing can help your listing stand out and rank higher in search results.</p>
+          <p>Competitive pricing can help your cornhole stand out and rank higher in search results.</p>
+          {errors.price && <div className="error-message">{errors.price}</div>}
           $
           <input
             type="text"
@@ -195,70 +244,63 @@ const CreateASpot = () => {
             value={price}
             placeholder='Price per night (USD)'
             name="price"
-            required
           />
         </label>
         <label>
           <h2>Liven up your spot with photos</h2>
           <p>Submit a link to at least one photo to publish your spot.</p>
+          {errors.previewImage && <div className="error-message">{errors.previewImage}</div>}
           <input
             type="text"
             onChange={(e) => setPreviewImage(e.target.value)}
             value={previewImage}
             placeholder='Preview Image URL'
             name='previewImage'
-            required
           />
         </label>
         <label>
-          <p></p>
-        <input
+          <p></p>{errors.firstSpotImg && <div className="error-message">{errors.firstSpotImg}</div>}
+          <input
             type="text"
             onChange={(e) => setFirstSpotImg(e.target.value)}
             value={firstSpotImg}
             placeholder='Image URL'
             name='firstSpotImg'
-
           />
         </label>
         <label>
-          <p></p>
-        <input
+          <p></p>{errors.secondSpotImg && <div className="error-message">{errors.secondSpotImg}</div>}
+          <input
             type="text"
             onChange={(e) => setSecondSpotImg(e.target.value)}
             value={secondSpotImg}
             placeholder='Image URL'
             name='secondSpotImg'
-
           />
         </label>
         <label>
-          <p></p>
-        <input
+          <p></p>{errors.thirdSpotImg && <div className="error-message">{errors.thirdSpotImg}</div>}
+          <input
             type="text"
             onChange={(e) => setThirdSpotImg(e.target.value)}
             value={thirdSpotImg}
             placeholder='Image URL'
             name='thirdSpotImg'
-
           />
         </label>
         <label>
-          <p></p>
-        <input
+          <p></p>{errors.fourthSpotImg && <div className="error-message">{errors.fourthSpotImg}</div>}
+          <input
             type="text"
             onChange={(e) => setFourthSpotImg(e.target.value)}
             value={fourthSpotImg}
             placeholder='Image URL'
             name='fourthSpotImg'
-
           />
-
         </label>
-
         <label>
           <p></p>
-        <button type="submit">Create Spot</button>
+          <button type="submit">Create Spot</button>
         </label>
       </form>
     </div>
