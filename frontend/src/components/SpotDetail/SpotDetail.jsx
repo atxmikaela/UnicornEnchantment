@@ -15,6 +15,10 @@ const SpotDetail = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [detailImages, setDetailImages] = useState([]);
+    const allReviews = useSelector((state) => state.reviewsReducer.allReviews);
+    const sessionUser = useSelector((state) => state.session.user);
+    const [userCanReview, setUserCanReview] = useState(false);
+
 
     useEffect(() => {
         const getSpot = async () => {
@@ -43,6 +47,14 @@ const SpotDetail = () => {
         }
     }, [spot]);
 
+    useEffect(() => {
+        if (isLoaded && spot && sessionUser && allReviews) {
+            const hasReviewed = allReviews.some((review) => review.userId === sessionUser.id);
+            const isOwner = spot.ownerId === sessionUser.id;
+            setUserCanReview(!isOwner && !hasReviewed);
+        }
+    }, [isLoaded, spot, sessionUser, allReviews]);
+
 
 
     function timestampToMonthYear(timestamp) {
@@ -66,6 +78,7 @@ const SpotDetail = () => {
 
     const areThereReviews = reviews && Object.keys(reviews).length > 0;
 
+
     if (!isLoaded || !spot) {
         return (
             <img
@@ -75,6 +88,7 @@ const SpotDetail = () => {
             />
         );
     } else {
+
         return (
             <div className='spot-detail-page'>
                 <div className='spot-detail-page-container'>
@@ -102,10 +116,24 @@ const SpotDetail = () => {
                         </span>
                     </div>
 
+
+
+                    <h2>★{ratingCheck(spot.avgStarRating)}</h2>
+
+                    { userCanReview ? (
+                        <button className="review-button" to="/spots/new">Post Your Review</button>
+
+                    ) : (
+
+                        <p></p>
+
+                    )}
+
+
                     {areThereReviews ? (
 
                         <div className='ratingsWrapper'>
-                            <h1>{ratingCheck(spot.avgStarRating)}</h1>
+
                             { }
                             {reviews && Object.values(reviews).map((review) => (
                                 <div key={review.id}>
@@ -133,5 +161,6 @@ const SpotDetail = () => {
         );
     }
 };
+
 
 export default SpotDetail;
