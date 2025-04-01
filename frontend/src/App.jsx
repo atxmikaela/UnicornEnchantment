@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import LoginFormModal from './components/LoginFormModal';
-import SignupFormModal from './components/SignupFormModal';
-import Navigation from './components/Navigation';
+// import LoginFormModal from './components/LoginFormModal';
+// import SignupFormModal from './components/SignupFormModal';
+// import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
-import CreateASpot from './components/Spots/CreateASpot';
-import ManageSpots from './components/Spots/ManageSpots';
-import UpdateSpot from './components/Spots/UpdateSpot';
-import ManageReviews from './components/Reviews/ManageReviews';
-import Splash from './components/Splash';
-import SpotDetail from './components/SpotDetail';
+// import CreateASpot from './components/Spots/CreateASpot';
+// import ManageSpots from './components/Spots/ManageSpots';
+// import UpdateSpot from './components/Spots/UpdateSpot';
+// import ManageReviews from './components/Reviews/ManageReviews';
+// import Splash from './components/Splash';
+// import SpotDetail from './components/SpotDetail';
 
 
 
@@ -40,34 +40,34 @@ const router = createBrowserRouter([
         path: '/',
         element: <Splash />,
       },
-      {
-        path: "login",
-        element: <LoginFormModal />
-      },
-      {
-        path: "signup",
-        element: <SignupFormModal />
-      },
-      {
-        path: "spots/:id",
-        element: <SpotDetail />
-      },
-      {
-        path: "/spots/new",
-        element: <CreateASpot />
-      },
-      {
-        path: "spots/current",
-        element: <ManageSpots />
-      },
-      {
-        path: "/spots/:id/edit",
-        element: <UpdateSpot />
-      },
-      {
-        path: "reviews/current",
-        element: <ManageReviews />
-      },
+      // {
+      //   path: "login",
+      //   element: <LoginFormModal />
+      // },
+      // {
+      //   path: "signup",
+      //   element: <SignupFormModal />
+      // },
+      // {
+      //   path: "spots/:id",
+      //   element: <SpotDetail />
+      // },
+      // {
+      //   path: "/spots/new",
+      //   element: <CreateASpot />
+      // },
+      // {
+      //   path: "spots/current",
+      //   element: <ManageSpots />
+      // },
+      // {
+      //   path: "/spots/:id/edit",
+      //   element: <UpdateSpot />
+      // },
+      // {
+      //   path: "reviews/current",
+      //   element: <ManageReviews />
+      // },
       {
         path: "*",
         element: <h1>Where you going? You are going to get abducted!</h1>

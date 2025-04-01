@@ -6,6 +6,7 @@ import { addReviewThunk } from '../../store/reviews';
 
 
 
+
 function ReviewModal({ onClose, errorMessage, spotId }) {
 
 
@@ -39,7 +40,7 @@ return () => {
 
     if (!userId) {
       console.error('userId is undefined! Cannot submit review.');
-      return; 
+      return;
     }
 
 
