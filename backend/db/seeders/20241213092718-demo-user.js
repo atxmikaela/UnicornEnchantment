@@ -157,8 +157,8 @@ module.exports = {
       {
         email: "demouser@cornhole.io",
         username: "demo",
-        firstName: "probe",
-        lastName: "ation",
+        firstName: "demo",
+        lastName: "user",
         hashedPassword: bcrypt.hashSync('demoPassword')
       }
 

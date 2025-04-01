@@ -197,6 +197,9 @@ router.post("/", requireAuth, validateReview, async (req, res, next) => {
   const userId = req.user.id;
   const { review, stars } = req.body;
 
+
+
+
   try {
     const existingSpot = await Spot.findByPk(spotId);
     const existingReview = await Review.findOne({
@@ -278,6 +281,7 @@ router.delete("/:reviewId", requireAuth, async (req, res, next) => {
   const uid = req.user.id;
   try {
     const review = await Review.findByPk(reviewId);
+
 
     if (!review) {
       return res.status(404).json({

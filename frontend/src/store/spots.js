@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 
 // ACTION TYPES
 const GET_ALL_SPOTS = "/spot/getAllSpots";
+const DELETE_SPOTS = "spot/deleteSpots";
 
 //step 6
 // ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
@@ -14,6 +15,10 @@ export const getAllSpotsAction = (spots) => {
   return action;
 };
 
+export const deleteSpots = (spotId) => ({
+    type: DELETE_SPOTS,
+    spotId,
+  });
 // THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
 export const getSpotsThunk = () => async (dispatch) => {
 
@@ -28,13 +33,25 @@ export const getSpotsThunk = () => async (dispatch) => {
 
 };
 
-// step 7
-// normalizing our state
 
-// const initialStateSpots = {
-//   allSpots: [],
-//   byId: {},
-// };
+export const deleteSpotsThunk = (spotId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(deleteSpots(spotId));
+      return { message: "Spot deleted successfully" };
+    } else {
+      const error = await response.json();
+      console.error("Backend error:", error);
+      throw new Error(error.message);
+    }
+  } catch (error) {
+    console.error("Error deleting spot:", error);
+    throw error;
+  }
+};
 
 const initialState = {};
 

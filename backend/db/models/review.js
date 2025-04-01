@@ -55,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       stars: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1,
         validate: {

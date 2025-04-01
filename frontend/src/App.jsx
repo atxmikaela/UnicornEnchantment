@@ -6,7 +6,7 @@ import SignupFormModal from './components/SignupFormModal';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import CreateASpot from './components/Spots/CreateASpot';
-import ManageSpot from './components/Spots/ManageSpot';
+import ManageSpots from './components/Spots/ManageSpots';
 import UpdateSpot from './components/Spots/UpdateSpot';
 import ManageReviews from './components/Reviews/ManageReviews';
 import Splash from './components/Splash';
@@ -58,10 +58,10 @@ const router = createBrowserRouter([
       },
       {
         path: "spots/current",
-        element: <ManageSpot />
+        element: <ManageSpots />
       },
       {
-        path: "spots/:id/edit",
+        path: "/spots/:id/edit",
         element: <UpdateSpot />
       },
       {

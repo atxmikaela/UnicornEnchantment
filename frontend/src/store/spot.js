@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 const GET_ONE_SPOT = "/spot/getOneSpot";
 const ADD_SPOT = "spot/createSpot";
 
+
 //step 6
 // ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
 
@@ -23,6 +24,7 @@ export const addSpot = (spot) => {
   };
 return action;
 };
+
 
 
 // THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
@@ -60,8 +62,9 @@ export const addSpotThunk = (spot) => async (dispatch) => {
     const error = await response.json();
     return Promise.reject(error);
 }
-
   };
+
+
 
 // step 7
 // normalizing our state

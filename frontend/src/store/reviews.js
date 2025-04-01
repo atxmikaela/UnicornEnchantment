@@ -2,6 +2,8 @@ import { csrfFetch } from "./csrf";
 
 // ACTION TYPES
 const GET_ALL_REVIEWS = "/review/getAllReviews";
+const ADD_REVIEW = "/review/addReview";
+const DELETE_REVIEW ="/review/deleteReview";
 
 // ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
 export const getAllReviewsAction = (reviews) => {
@@ -11,6 +13,20 @@ export const getAllReviewsAction = (reviews) => {
     };
     return action;
 };
+
+export const addReview = (review) => {
+    const action = {
+        type: ADD_REVIEW,
+        payload: review,
+    };
+    return action;
+}
+
+export const deleteReview = (id) => ({
+        type: DELETE_REVIEW,
+        payload: id,
+
+});
 
 // THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
 export const getReviewsThunk = (spotId) => async (dispatch) => {
@@ -32,10 +48,37 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
     }
 };
 
+export const addReviewThunk = (reviewData) => async (dispatch) => {
+
+    const response = await csrfFetch("/api/reviews", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reviewData)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addReview(data));
+        return data;
+    } else {
+        const error = await response.json();
+        return Promise.reject(error);
+    }
+};
+
+export const deleteReviewThunk = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/session/${id}`, {
+      method: 'DELETE',
+      });
+    dispatch(deleteReview());
+    return response;
+  };
+
 // normalizing our state
 
 const initialState = {
-    allReviews: null,
+
     byId: {}, // Correct initial state
 };
 
