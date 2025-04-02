@@ -1,13 +1,13 @@
 
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { addSpotThunk } from '../../../store/spot';
 import { useNavigate } from 'react-router-dom';
+import { editCornholeThunk } from '../store/cornholes';
 
 
 
 
-const UpdateASpot = () => {
+const UpdateCornhole = () => {
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -18,10 +18,10 @@ const UpdateASpot = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-  const [firstSpotImg, setFirstSpotImg] = useState("");
-  const [secondSpotImg, setSecondSpotImg] = useState("");
-  const [thirdSpotImg, setThirdSpotImg] = useState("");
-  const [fourthSpotImg, setFourthSpotImg] = useState("");
+  const [firstCornholeImg, setFirstCornholeImg] = useState("");
+  const [secondCornholeImg, setSecondCornholeImg] = useState("");
+  const [thirdCornholeImg, setThirdCornholeImg] = useState("");
+  const [fourthCornholeImg, setFourthCornholeImg] = useState("");
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,20 +73,20 @@ const UpdateASpot = () => {
       newErrors.previewImage = 'Image URL must end in png, jpg, or jpeg';
     }
 
-    if (firstSpotImg && !imageRegex.test(firstSpotImg)) {
-      newErrors.firstSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    if (firstCornholeImg && !imageRegex.test(firstCornholeImg)) {
+      newErrors.firstCornholeImg = 'Image URL must end in png, jpg, or jpeg';
     }
 
-    if (secondSpotImg && !imageRegex.test(secondSpotImg)) {
-      newErrors.secondSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    if (secondCornholeImg && !imageRegex.test(secondCornholeImg)) {
+      newErrors.secondCornholeImg = 'Image URL must end in png, jpg, or jpeg';
     }
 
-    if (thirdSpotImg && !imageRegex.test(thirdSpotImg)) {
-      newErrors.thirdSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    if (thirdCornholeImg && !imageRegex.test(thirdCornholeImg)) {
+      newErrors.thirdCornholeImg = 'Image URL must end in png, jpg, or jpeg';
     }
 
-    if (fourthSpotImg && !imageRegex.test(fourthSpotImg)) {
-      newErrors.fourthSpotImg = 'Image URL must end in png, jpg, or jpeg';
+    if (fourthCornholeImg && !imageRegex.test(fourthCornholeImg)) {
+      newErrors.fourthCornholeImg = 'Image URL must end in png, jpg, or jpeg';
     }
 
     setErrors(newErrors);
@@ -95,7 +95,7 @@ const UpdateASpot = () => {
 
 
     if (Object.keys(newErrors).length === 0) {
-      const spot = {
+      const cornhole = {
         country,
         address,
         city,
@@ -106,18 +106,18 @@ const UpdateASpot = () => {
         name,
         price,
         previewImage,
-        firstSpotImg,
-        secondSpotImg,
-        thirdSpotImg,
-        fourthSpotImg,
-      }
+        firstCornholeImg,
+        secondCornholeImg,
+        thirdCornholeImg,
+        fourthCornholeImg,
+      };
 
 
-      dispatch(addSpotThunk(spot))
+      dispatch(editCornholeThunk(cornhole))
       .then((data) => {
         console.log("Updated cornhole ID:", data.id);
         reset();
-        navigate(`/spots/${data.id}`);
+        navigate(`/cornholes/${data.id}`);
       })
       .catch((err) => {
         console.error("Error updating cornhole:", err);
@@ -138,10 +138,10 @@ const UpdateASpot = () => {
     setName('');
     setPrice('');
     setPreviewImage('');
-    setFirstSpotImg('');
-    setSecondSpotImg('');
-    setThirdSpotImg('');
-    setFourthSpotImg('');
+    setFirstCornholeImg('');
+    setSecondCornholeImg('');
+    setThirdCornholeImg('');
+    setFourthCornholeImg('');
   };
 
   return (
@@ -211,7 +211,7 @@ const UpdateASpot = () => {
           />
         </label>
         <label>
-          <h2>Describe your place to guests</h2>
+          <h2>Describe your cornhole to guests</h2>
           <p>Mention the best features of your space, any special amenities like fast wife or parking, and what you love about the cornhood.</p>
           {errors.description && <div className="error-message">{errors.description}</div>}
           <textarea
@@ -223,19 +223,19 @@ const UpdateASpot = () => {
           />
         </label>
         <label>
-          <h2>Create a title for your spot</h2>
-          <p>Catch guests&apos; attention with a spot title that highlights what makes your cornhole special.</p>
+          <h2>Create a title for your cornhole</h2>
+          <p>Catch guests&apos; attention with a cornhole title that highlights what makes your cornhole special.</p>
           {errors.name && <div className="error-message">{errors.name}</div>}
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
             value={name}
-            placeholder='Name of your spot'
+            placeholder='Name of your cornhole'
             name='name'
           />
         </label>
         <label>
-          <h2>Set a base price for your spot</h2>
+          <h2>Set a base price for your cornhole</h2>
           <p>Competitive pricing can help your cornhole stand out and rank higher in search results.</p>
           {errors.price && <div className="error-message">{errors.price}</div>}
           $
@@ -248,8 +248,8 @@ const UpdateASpot = () => {
           />
         </label>
         <label>
-          <h2>Liven up your spot with photos</h2>
-          <p>Submit a link to at least one photo to publish your spot.</p>
+          <h2>Liven up your cornhole with photos</h2>
+          <p>Submit a link to at least one photo to publish your cornhole.</p>
           {errors.previewImage && <div className="error-message">{errors.previewImage}</div>}
           <input
             type="text"
@@ -260,48 +260,48 @@ const UpdateASpot = () => {
           />
         </label>
         <label>
-          <p></p>{errors.firstSpotImg && <div className="error-message">{errors.firstSpotImg}</div>}
+          <p></p>{errors.firstCornholeImg && <div className="error-message">{errors.firstCornholeImg}</div>}
           <input
             type="text"
-            onChange={(e) => setFirstSpotImg(e.target.value)}
-            value={firstSpotImg}
+            onChange={(e) => setFirstCornholeImg(e.target.value)}
+            value={firstCornholeImg}
             placeholder='Image URL'
-            name='firstSpotImg'
+            name='firstCornholeImg'
           />
         </label>
         <label>
-          <p></p>{errors.secondSpotImg && <div className="error-message">{errors.secondSpotImg}</div>}
+          <p></p>{errors.secondCornholeImg && <div className="error-message">{errors.secondCornholeImg}</div>}
           <input
             type="text"
-            onChange={(e) => setSecondSpotImg(e.target.value)}
-            value={secondSpotImg}
+            onChange={(e) => setSecondCornholeImg(e.target.value)}
+            value={secondCornholeImg}
             placeholder='Image URL'
-            name='secondSpotImg'
+            name='secondCornholeImg'
           />
         </label>
         <label>
-          <p></p>{errors.thirdSpotImg && <div className="error-message">{errors.thirdSpotImg}</div>}
+          <p></p>{errors.thirdCornholeImg && <div className="error-message">{errors.thirdCornholeImg}</div>}
           <input
             type="text"
-            onChange={(e) => setThirdSpotImg(e.target.value)}
-            value={thirdSpotImg}
+            onChange={(e) => setThirdCornholeImg(e.target.value)}
+            value={thirdCornholeImg}
             placeholder='Image URL'
-            name='thirdSpotImg'
+            name='thirdCornholeImg'
           />
         </label>
         <label>
-          <p></p>{errors.fourthSpotImg && <div className="error-message">{errors.fourthSpotImg}</div>}
+          <p></p>{errors.fourthCornholeImg && <div className="error-message">{errors.fourthCornholeImg}</div>}
           <input
             type="text"
-            onChange={(e) => setFourthSpotImg(e.target.value)}
-            value={fourthSpotImg}
+            onChange={(e) => setFourthCornholeImg(e.target.value)}
+            value={fourthCornholeImg}
             placeholder='Image URL'
-            name='fourthSpotImg'
+            name='fourthCornholeImg'
           />
         </label>
         <label>
           <p></p>
-          <button type="submit">Update Spot</button>
+          <button type="submit">Update Cornhole</button>
         </label>
       </form>
     </div>
@@ -309,4 +309,4 @@ const UpdateASpot = () => {
 }
 
 
-export default UpdateASpot;
+export default UpdateCornhole;

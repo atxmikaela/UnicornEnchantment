@@ -1,109 +1,203 @@
+
+/*
+
+STEP 1 AND 2
+1. Browser -> User does some action in the browser which leads to us triggering the need for data Example: navigating a page and needing to GET information from the backend
+
+2. Component that is currently mounted on the browser -> This is the react file that is responsible for the page / or component that needs to access data changes Example that: React file for a whole page, maybe a react file for just simple nav bar
+
+*/
+
+
+
+// IMPORTS
 import { csrfFetch } from "./csrf";
 
-// ACTION TYPES
-const GET_ALL_REVIEWS = "/review/getAllReviews";
-const ADD_REVIEW = "/review/addReview";
-const DELETE_REVIEW ="/review/deleteReview";
+// Action constants
+export const LOAD_REVIEWS = 'reviews/loadReviews';
+export const CREATE_REVIEW = 'reviews/createReview';
+export const UPDATE_REVIEW = 'reviews/updateReview';
+export const REMOVE_REVIEW = 'reviews/removeReview';
 
-// ACTION CREATORS - USE ACTION AT THE END OF FUNCTION NAME
-export const getAllReviewsAction = (reviews) => {
-    const action = {
-        type: GET_ALL_REVIEWS,
-        payload: reviews,
-    };
-    return action;
-};
-
-export const addReview = (review) => {
-    const action = {
-        type: ADD_REVIEW,
-        payload: review,
-    };
-    return action;
-}
-
-export const deleteReview = (id) => ({
-        type: DELETE_REVIEW,
-        payload: id,
-
+// Action creators // STEP 6. In charge of packaging up our data using an object with type and payload
+const loadReviewsAction = (reviews) => ({
+    type: LOAD_REVIEWS,
+    reviews
 });
 
-// THUNKS - USE THUNKS AT THE END OF FUNCTION NAME
-export const getReviewsThunk = (spotId) => async (dispatch) => {
-    try {
-        ("Fetching reviews for spotId:", spotId);
-        const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
-        if (res.ok) {
-            const data = await res.json();
-            ("API response:", data);
-            ("Reviews data:", data.Reviews);
-            dispatch(getAllReviewsAction(data.Reviews));
-            ("Action dispatched:", getAllReviewsAction(data.Reviews));
-        } else {
-            const errorData = await res.json();
-            console.error("API error:", errorData);
-        }
-    } catch (error) {
-        console.error("Fetch error:", error);
-    }
-};
 
-export const addReviewThunk = (reviewData) => async (dispatch) => {
+const createReviewAction = (review) => ({
+    type: CREATE_REVIEW,
+    review
+});
 
-    const response = await csrfFetch("/api/reviews", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(reviewData)
-    });
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(addReview(data));
-        return data;
-    } else {
-        const error = await response.json();
-        return Promise.reject(error);
-    }
-};
+const editReviewAction = (review) => ({
+    type: UPDATE_REVIEW,
+    review
+});
 
-export const deleteReviewThunk = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/session/${id}`, {
-      method: 'DELETE',
-      });
-    dispatch(deleteReview());
-    return response;
-  };
+const deleteReviewAction = (reviewId) => ({
+    type: REMOVE_REVIEW,
+    reviewId
+});
 
-// normalizing our state
 
-const initialState = {
+/* STEP 3: THUNKS
 
-    byId: {}, // Correct initial state
-};
+Browser -> User does some action in the browser which leads to us triggering the need for data Example: navigating a page and needing to GET information from the backend
 
-// REDUCER
+Component that is currently mounted on the browser -> This is the react file that is responsible for the page / or component that needs to access data changes Example that: React file for a whole page, maybe a react file for just simple nav bar
 
-const reviewsReducer = (state = initialState, action) => {
-    let newState;
-    ("Reducer action:", action);
-    switch (action.type) {
-        case GET_ALL_REVIEWS: {
-            const reviewsArr = action.payload;
-            ("Reducer payload:", reviewsArr);
-            newState = { ...state };
-            newState.allReviews = reviewsArr;
-            let newByIdGetAllReviews = {};
-            for (let review of reviewsArr) {
-                newByIdGetAllReviews[review.id] = review;
+*/
+
+        export const loadReviewsThunk = () => async (dispatch) => {
+        try {
+            const response = await csrfFetch('/api/spots/');  // STEP 4 KINDA: Go to the route to see how the data is being retrieved/ processed in the route/ database
+            if (response.ok) {
+                const corn = await response.json();  // STEP 5: Data goes back to thunk
+                dispatch(loadReviewsAction(corn.Spots));
+            } else {
+                throw response;
+                }
+            } catch (error) {
+                return error;
             }
-            newState.byId = newByIdGetAllReviews;
-            ("Reducer new state:", newState);
-            return newState;
+        };
+
+
+        export const createReviewThunk = (review) => async (dispatch) => {
+        try {
+            const response = await csrfFetch('/api/spots', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(review),
+            });
+            if (response.ok) {
+                const corn = await response.json();
+                dispatch(createReviewAction(corn));
+                return corn;
+            } else {
+                throw response;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+        export const editReviewThunk = (review) => async (dispatch) => {
+        try {
+            const response = await csrfFetch(`/api/spots/${review.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(review),
+            });
+            if (response.ok) {
+                const corn = await response.json();
+                dispatch(editReviewAction(corn));
+                return corn;
+            } else {
+                throw response;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+        export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+        try {
+            const response = await csrfFetch(`/api/spots/${reviewId}/`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                dispatch(deleteReviewAction(reviewId));
+                return response;
+            } else {
+                throw response;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+
+
+const initialState = { //initial state declaration and initiation
+    reviews: {}, // storing all reviews by ID for o/1 time
+ //initially tried also using an array to store them in order, but the indeces weren't synced with the ID's so I took an Object.keys approach.
+};
+
+// STEP 7 CONTINUED ON STORE PAGE WHEN REDUCER IS PASSED TO IT
+
+// 7. In charge of placing our data into the store (Anthony calls this Big Dawg or Grand daddy reducer)
+
+
+const reviewReducer = (state = initialState, action) => {
+    // begin it with a switch action type. I know you do it a little differently
+    switch (action.type) {
+        case LOAD_REVIEWS: {
+            // load all of my reviews into my state
+            const newReviews = {}; //create my new object since state is immutable
+            //const newbyIds = []; // do the same with an array
+            // basic, I know lol
+            for (let i = 0; i < action.reviews.length; i++) {
+                const review = action.reviews[i];
+                if (review && review.id) {
+                    newReviews[review.id] = review;
+                }
+            }
+            return {
+                ...state,
+                reviews: newReviews,
+            };
         }
+
+
+        case CREATE_REVIEW: {
+            // add a new review after creating it
+            const review = action.review;
+            if (!review || !review.id) {
+                return state;
+            }
+            const newReviews = { ...state.reviews };
+            newReviews[review.id] = review; // Add the new review
+              return {
+                ...state,
+                reviews: newReviews,
+            };
+        }
+
+        case UPDATE_REVIEW: {
+            // I’m updating an existing review
+            const review = action.review;
+            const newReviews = { ...state.reviews };
+            newReviews[review.id] = review; // Update the review with this ID
+
+            if (!review || !review.id) {
+              return state;
+              }
+
+            // byIds doesn’t change since the ID stays the same
+            return {
+                ...state,
+                reviews: newReviews,
+
+            };
+        }
+
+        case REMOVE_REVIEW: {
+            // I’m removing a review by ID
+            const reviewId = action.reviewId;
+            const newReviews = { ...state.reviews };
+            delete newReviews[reviewId]; // Remove the review from the object
+            return {
+                ...state,
+                reviews: newReviews,
+             };
+        }
+
         default:
-            return state;
+            return state; // Return the unchanged state if the action doesn’t match
     }
 };
 
-export default reviewsReducer;
+export default reviewReducer;

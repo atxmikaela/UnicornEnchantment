@@ -1,64 +1,64 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getSpotsThunk, deleteSpotsThunk} from "../../../store/spots";
-import SpotCard from "../../Splash/SplashCard";
-import "./ManageSpots.css";
+import CrashCard from "../../Crash/CrashCard";
+import "./ManageCornholes.css";
+import { deleteCornholeThunk, loadCornholesThunk } from "../../../store/cornholes";
 
-const ManageSpots = () => {
+const ManageCornholes = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spots = useSelector((state) => state.spotsReducer.allSpots);
+  const cornholes = useSelector((state) => state.cornholes);
   const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [selectedSpotId, setSelectedSpotId] = useState(null);
+  const [selectedCornholeId, setSelectedCornholeId] = useState(null);
 
 
   useEffect(() => {
-    const getSpots = async () => {
-      await dispatch(getSpotsThunk());
+    const loadCornholes = async () => {
+      await dispatch(loadCornholesThunk());
       setIsLoaded(true);
     };
 
     if (!isLoaded) {
-      getSpots();
+      loadCornholes();
     }
   }, [dispatch, isLoaded]);
 
-  const goToSpotDetail = (e, spot) => {
+  const goToCornholeDetail = (e, cornhole) => {
     e.preventDefault();
-    navigate(`/spots/${spot.id}`);
+    navigate(`/cornholes/${cornhole.id}`);
   };
 
-  const editSpot = (spotId) => {
-    navigate(`/spots/${spotId}/edit`);
+  const editCornhole = (cornholeId) => {
+    navigate(`/cornholes/${cornholeId}/edit`);
   };
 
-  const openDeleteModal = (spotId) => {
-    setSelectedSpotId(spotId);
+  const openDeleteModal = (cornholeId) => {
+    setSelectedCornholeId(cornholeId);
     setShowModal(true);
   };
 
   const handleDelete = async () => {
-    if (selectedSpotId) {
+    if (selectedCornholeId) {
       try {
-        await dispatch(deleteSpotsThunk(selectedSpotId)); // Dispatch the delete action
+        await dispatch(deleteCornholeThunk(selectedCornholeId)); // Dispatch the delete action
         setShowModal(false);
-        setSelectedSpotId(null);
+        setSelectedCornholeId(null);
         setIsLoaded(false); // Trigger a re-fetch of spots
       } catch (error) {
-        console.error("Error deleting spot:", error);
+        console.error("Error deleting cornhole:", error);
         setShowModal(false);
-        setSelectedSpotId(null);
+        setSelectedCornholeId(null);
       }
     }
   };
 
   const closeModal = () => {
     setShowModal(false);
-    setSelectedSpotId(null);
+    setSelectedCornholeId(null);
   };
 
   if (!isLoaded) {
@@ -71,29 +71,29 @@ const ManageSpots = () => {
     );
   } else {
 
-    const userSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
+    const userCornholes = cornholes.filter(cornhole => cornhole.ownerId === sessionUser.id);
     return (
       <div>
         <h1>Manage your Cornholes</h1>
-        {userSpots && userSpots.length > 0 ? (
+        {userCornholes && userCornholes.length > 0 ? (
           <div className="card-list-container">
-            {userSpots.map((spot, idx) => (
+            {userCornholes.map((cornhole, idx) => (
               <div
                 className="card-container"
-                key={`${idx}-${spot.id}`}>
-                <div onClick={(e) => goToSpotDetail(e, spot)}>
-                <SpotCard spot={spot} />
+                key={`${idx}-${cornhole.id}`}>
+                <div onClick={(e) => goToCornholeDetail(e, cornhole)}>
+                <CrashCard cornhole={cornhole} />
               </div>
               <div className="card-buttons">
-                <button onClick={() => editSpot(spot.id)}>Update</button>
-                <button onClick={() => openDeleteModal(spot.id)}>Delete</button>
+                <button onClick={() => editCornhole(cornhole.id)}>Update</button>
+                <button onClick={() => openDeleteModal(cornhole.id)}>Delete</button>
               </div>
             </div>
            ))}
            </div>
          ) : (
            <div className="no-spots">
-             <h2><NavLink to="/spots/new">Create a new Cornhole</NavLink></h2>
+             <h2><NavLink to="/cornholes/new">Create a new Cornhole</NavLink></h2>
            </div>
          )}
 
@@ -101,18 +101,18 @@ const ManageSpots = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>Confirm Delete</h2>
-            <p>Are you sure you want to remove this spot from the listings?</p>
+            <p>Are you sure you want to remove this cornhole from the listings?</p>
             <button
               onClick={handleDelete}
               style={{ backgroundColor: "red", color: "white", marginRight: "10px" }}
             >
-              Yes (Delete Spot)
+              Yes (Delete Cornhole)
             </button>
             <button
               onClick={closeModal}
               style={{ backgroundColor: "gray", color: "white" }}
             >
-              No (Keep Spot)
+              No (Keep Cornhole)
             </button>
           </div>
         </div>
@@ -121,4 +121,4 @@ const ManageSpots = () => {
   );
 }
 };
-export default ManageSpots;
+export default ManageCornholes;

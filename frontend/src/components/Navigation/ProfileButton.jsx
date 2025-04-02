@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
           <>
             <li>Hello, {user.firstName[0].toUpperCase() + user.firstName.slice(1)}</li>
             <li>{user.email}</li>
-            <li><NavLink to="/spots/current">Manage Spots</NavLink></li>
+            <li><NavLink to="/cornoles/current">Manage Spots</NavLink></li>
             <li>
               <button className="login-logout-button" onClick={logout}>Log Out</button>
             </li>

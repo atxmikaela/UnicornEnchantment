@@ -5,14 +5,11 @@ import LoginFormModal from './components/LoginFormModal';
 import SignupFormModal from './components/SignupFormModal';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
-import Splash from './components/Splash';
-// import CreateASpot from './components/Spots/CreateASpot';
-// import ManageSpots from './components/Spots/ManageSpots';
-// import UpdateSpot from './components/Spots/UpdateSpot';
-// import ManageReviews from './components/Reviews/ManageReviews';
-
-// import SpotDetail from './components/SpotDetail';
-
+import Crash from './components/Crash/index.js';
+import CornholeDetail from './components/CornholeDetail/CornholeDetail.jsx';
+import CreateACornhole from './components/Cornholes/CreateACornhole/CreateACornhole.jsx';
+import ManageCornholes from './components/Cornholes/ManageCornholes';
+import UpdateCornhole from './components/UpdateCornhole.jsx';
 
 
 function Layout() {
@@ -39,7 +36,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Splash />,
+        element: <Crash />,
       },
       {
         path: "login",
@@ -49,27 +46,27 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormModal />
       },
-      // {
-      //   path: "spots/:id",
-      //   element: <SpotDetail />
-      // },
-      // {
-      //   path: "/spots/new",
-      //   element: <CreateASpot />
-      // },
-      // {
-      //   path: "spots/current",
-      //   element: <ManageSpots />
-      // },
-      // {
-      //   path: "/spots/:id/edit",
-      //   element: <UpdateSpot />
-      // },
-      // {
-      //   path: "reviews/current",
-      //   element: <ManageReviews />
-      // },
+
+
       {
+        path: "cornholes/:id",
+        element: <CornholeDetail />
+      },
+      {
+        path: "/cornholes/new",
+        element: <CreateACornhole />
+      },
+      {
+        path: "cornholes/current",
+        element: <ManageCornholes />
+      },
+      {
+        path: "/cornholes/:id/edit",
+        element: <UpdateCornhole />
+      },
+      {
+
+
         path: "*",
         element: <h1>Where you going? You are going to get abducted!</h1>
       },
@@ -77,6 +74,8 @@ const router = createBrowserRouter([
     ]
   }
 ]);
+
+
 
 function App() {
   return <RouterProvider router={router} />;

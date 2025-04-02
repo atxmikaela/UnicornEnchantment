@@ -8,7 +8,10 @@ import * as sessionActions from './store/session';
 import { Modal, ModalProvider } from './context/Modal';
 import configureStore from './store';
 
+
 const store = configureStore();
+
+
 
 if (import.meta.env.MODE !== 'production') {
   restoreCSRF();
@@ -17,6 +20,8 @@ if (import.meta.env.MODE !== 'production') {
   window.store = store;
   window.sessionActions = sessionActions;
 }
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

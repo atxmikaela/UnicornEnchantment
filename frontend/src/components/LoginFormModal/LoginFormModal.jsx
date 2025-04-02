@@ -65,6 +65,7 @@ function LoginFormModal() {
             required
           />
         </label>
+        <p></p>
         <label>
           Password
           <input
@@ -78,12 +79,14 @@ function LoginFormModal() {
           <p>{errors.credential}</p>
         )}
         <button type="submit" disabled={disabledLogin}>Log In</button>
+
       </form>
-      <a href='#' onClick={(e) => {
+      <button href='#' onClick={(e) => {
+      // <a href='#' onClick={(e) => {
         e.preventDefault();
         handleDemoLogin(e);
       }} className='demo-login'>
-        Log in as Demo User</a>
+        Log in as Demo User</button>
 
       </div>
     </>

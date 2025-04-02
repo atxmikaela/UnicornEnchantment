@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './ReviewModal.css';
-import { addReviewThunk } from '../../store/reviews';
+import addReviewThunk from '../../store';
 
 
 
 
 
-function ReviewModal({ onClose, errorMessage, spotId }) {
+
+function ReviewModal({ onClose, errorMessage, cornholeId }) {
 
 
 const modalContentRef = useRef(null);
@@ -46,7 +46,7 @@ return () => {
 
 
     let reviewData = {
-      spotId: parseInt(spotId, 10),
+      cornholeId: parseInt(cornholeId, 10),
       userId,
       stars,
       review: reviewText,

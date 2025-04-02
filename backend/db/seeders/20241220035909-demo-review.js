@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     await Review.bulkCreate([
@@ -74,7 +74,7 @@ module.exports = {
   { spotId: 13, userId: 15, review: "Tried to plot a course to Maize-7. Ended up on Mars. 1 star, wrong turn.", stars: 1 },
   { spotId: 13, userId: 7, review: "The Kernel ghosts in astronaut suits taught me how to moonwalk on corn. I'm now a corn moonwalker. 5 stars, corn moonwalk!", stars: 5 },
   { spotId: 13, userId: 2, review: "The ship's navigation system gave me the power to teleport with corn. I'm now a corn teleport. 5 stars, corn teleportation!", stars: 5 },
-  
+
     ], { validate: true });
   },
 
