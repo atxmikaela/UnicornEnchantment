@@ -1,0 +1,30 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "on",
+    "editor.defaultColorDecorators": true,
+    "editor.foldingStrategy": "indentation",
+    "terminal.integrated.tabs.defaultColor": "terminal.ansiRed",
+    "css.format.spaceAroundSelectorSeparator": true,
+    "npm.packageManager": "npm",
+    "prettier.enableDebugLogs": true,
+    "prettier.experimentalTernaries": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "explorer.compactFolders": false,
+    "explorer.confirmDelete": true,
+    "explorer.confirmDragAndDrop": true,
+    "explorer.expandSingleFolderWorkspaces": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.openEditors.sortOrder": "editorOrder",
+    "window.zoomLevel": 1,
+    "window.autoDetectColorScheme": true,
+    "workbench.editor.autoLockGroups": {
+        "terminalEditor": false
+    },
+    "workbench.startupEditor": "terminal",
+    "accessibility.signals.terminalCommandSucceeded": {
+        "sound": "on"
+    }
+}

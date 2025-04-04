@@ -1,0 +1,58 @@
+.cornhole-detail-page{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+    display: grid;
+    justify-content: center;
+    padding: 0 20px 0 17px;
+
+}
+
+
+
+.cornhole-detail-main-panels {
+
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: 600 px;
+
+
+}
+
+.left-panel{
+    aspect-ratio: 7 / 4.93;
+    overflow: hidden;
+    padding-right: 3px;
+}
+
+.right-panel{
+  aspect-ratio: 7 / 6;
+  overflow: hidden;
+  padding-left: 3px;
+
+
+
+}
+
+.detail-preview-image{
+    width: 100%;
+    height: 100%;
+}
+
+.detail-images{
+    width: 50%;
+    height: 50%;
+
+
+}
+
+.hosted-by{
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+}
+
+.price-reviews{
+    display: flex;
+    align-items: center;
+
+}

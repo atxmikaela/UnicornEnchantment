@@ -1,0 +1,247 @@
+
+/*
+
+STEP 1 AND 2
+1. Browser -> User does some action in the browser which leads to us triggering the need for data Example: navigating a page and needing to GET information from the backend
+
+2. Component that is currently mounted on the browser -> This is the react file that is responsible for the page / or component that needs to access data changes Example that: React file for a whole page, maybe a react file for just simple nav bar
+
+*/
+
+
+
+// IMPORTS
+import { csrfFetch } from "./csrf";
+
+// Action constants
+export const LOAD_CORNHOLES = 'cornholes/loadCornholes';
+export const RECEIVE_CORNHOLE = 'cornholes/receiveCornhole';
+export const CREATE_CORNHOLE = 'cornholes/createCornhole';
+export const UPDATE_CORNHOLE = 'cornholes/updateCornhole';
+export const REMOVE_CORNHOLE = 'cornholes/removeCornhole';
+
+// Action creators // STEP 6. In charge of packaging up our data using an object with type and payload
+export const loadCornholesAction = (cornholes) => ({
+    type: LOAD_CORNHOLES,
+    cornholes
+});
+
+export const receiveCornholeAction = (cornhole) => {
+    const action = {
+    type: RECEIVE_CORNHOLE,
+    payload: cornhole,
+    };
+    return action;
+};
+
+export const createCornholeAction = (cornhole) => ({
+    type: CREATE_CORNHOLE,
+    cornhole
+});
+
+export const editCornholeAction = (cornhole) => ({
+    type: UPDATE_CORNHOLE,
+    cornhole
+});
+
+export const deleteCornholeAction = (cornholeId) => ({
+    type: REMOVE_CORNHOLE,
+    cornholeId
+});
+
+
+/* STEP 3: THUNKS
+
+Browser -> User does some action in the browser which leads to us triggering the need for data Example: navigating a page and needing to GET information from the backend
+
+Component that is currently mounted on the browser -> This is the react file that is responsible for the page / or component that needs to access data changes Example that: React file for a whole page, maybe a react file for just simple nav bar
+
+*/
+
+        export const loadCornholesThunk = () => async (dispatch) => {
+        try {
+            const resp = await csrfFetch('/api/spots/');  // STEP 4 KINDA: Go to the route to see how the data is being retrieved/ processed in the route/ database
+            if (resp.ok) {
+                const corn = await resp.json();  // STEP 5: Data goes back to thunk
+                dispatch(loadCornholesAction(corn.Spots));
+            } else {
+                throw resp;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+        export const receiveCornholeThunk = (cornholeId) => async (dispatch) => {
+        try {
+            const res = await csrfFetch(`/api/spots/${cornholeId}`);
+            if (res.ok) {
+                const corn = await res.json();
+                dispatch(receiveCornholeAction(corn));
+            } else {
+                const errorData = await res.json();
+                return errorData;
+                }
+            } catch (error) { return }
+        };
+
+        export const createCornholeThunk = (cornhole) => async (dispatch) => {
+        try {
+            const resp = await csrfFetch('/api/spots', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cornhole),
+            });
+            if (resp.ok) {
+                const corn = await resp.json();
+                dispatch(createCornholeAction(corn));
+                return corn;
+            } else {
+                throw resp;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+        export const editCornholeThunk = (cornhole) => async (dispatch) => {
+        try {
+            const resp = await csrfFetch(`/api/spots/${cornhole.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(cornhole),
+            });
+            if (resp.ok) {
+                const corn = await resp.json();
+                dispatch(editCornholeAction(corn));
+                return corn;
+            } else {
+                throw resp;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+        export const deleteCornholeThunk = (cornholeId) => async (dispatch) => {
+        try {
+            const resp = await csrfFetch(`/api/spots/${cornholeId}`, {
+                method: 'DELETE',
+            });
+            if (resp.ok) {
+                dispatch(deleteCornholeAction(cornholeId));
+                return resp;
+            } else {
+                throw resp;
+                }
+            } catch (error) {
+                return error;
+            }
+        };
+
+
+
+ // storing all cornholes by ID for o/1 time
+ //initially tried also using an array to store them in order, but the indeces weren't synced with the ID's so I took an Object.keys approach.
+
+
+// STEP 7 CONTINUED ON STORE PAGE WHEN REDUCER IS PASSED TO IT
+
+// 7. In charge of placing our data into the store (Anthony calls this Big Dawg or Grand daddy reducer)
+const initialState = {
+    byId: {},
+};
+
+const cornholeReducer = (state = initialState, action) => {
+    // begin it with a switch action type. I know you do it a little differently
+
+    let newState;
+    switch (action.type) {
+        case LOAD_CORNHOLES: {
+            // load all of my cornholes into my state
+            const newCornholes = {}; //create my new object since state is immutable
+            //const newbyIds = []; // do the same with an array
+            // basic, I know lol
+            for (let i = 0; i < action.cornholes.length; i++) {
+                const cornhole = action.cornholes[i];
+                if (cornhole && cornhole.id) {
+                    newCornholes[cornhole.id] = cornhole;
+                }
+            }
+            return {
+                ...state,
+                cornholes: newCornholes,
+            };
+        }
+
+        case RECEIVE_CORNHOLE: {
+            const cornhole = action.payload;
+      newState = {
+        ...state,
+        byId: {
+          ...state.byId,
+          [cornhole.id]: cornhole,
+        },
+      };
+
+      return newState;
+    }
+
+
+
+
+
+
+
+
+
+        case CREATE_CORNHOLE: {
+            // add a new cornhole after creating it
+            const cornhole = action.cornhole;
+            if (!cornhole || !cornhole.id) {
+                return state;
+            }
+            const newCornholes = { ...state.cornholes };
+            newCornholes[cornhole.id] = cornhole; // Add the new cornhole
+              return {
+                ...state,
+                cornholes: newCornholes,
+            };
+        }
+
+        case UPDATE_CORNHOLE: {
+            // I’m updating an existing cornhole
+            const cornhole = action.cornhole;
+            const newCornholes = { ...state.cornholes };
+            newCornholes[cornhole.id] = cornhole; // Update the cornhole with this ID
+
+            if (!cornhole || !cornhole.id) {
+              return state;
+              }
+
+            // byIds doesn’t change since the ID stays the same
+            return {
+                ...state,
+                cornholes: newCornholes,
+
+            };
+        }
+
+        case REMOVE_CORNHOLE: {
+            // I’m removing a cornhole by ID
+            const cornholeId = action.cornholeId;
+            const newCornholes = { ...state.cornholes };
+            delete newCornholes[cornholeId]; // Remove the cornhole from the object
+            return {
+                ...state,
+                cornholes: newCornholes,
+             };
+
+            }
+        default:
+            return state;
+            // Return the unchanged state if the action doesn’t match
+    }
+};
+
+export default cornholeReducer;

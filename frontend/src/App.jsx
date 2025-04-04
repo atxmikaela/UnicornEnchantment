@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import LoginFormModal from './components/LoginFormModal';
-import SignupFormModal from './components/SignupFormModal';
 import Navigation from './components/Navigation';
-import * as sessionActions from './store/session';
-import Crash from './components/Crash/index.js';
-import CornholeDetail from './components/CornholeDetail/CornholeDetail.jsx';
-import CreateACornhole from './components/Cornholes/CreateACornhole/CreateACornhole.jsx';
-import ManageCornholes from './components/Cornholes/ManageCornholes';
-import UpdateCornhole from './components/UpdateCornhole.jsx';
+import * as sessionActions from '../src/store/session';
+import Home from './components/Pages/Home';
+import AddCornhole from './components/Pages/AddCornhole/AddCornhole';
+import SingleCornhole from './components/Pages/SingleCornhole';
+import LoginFormModal from './components/Modals/LoginFormModal';
+import SignupFormModal from './components/Modals/SignupFormModal';
+
+
+
+
 
 
 function Layout() {
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Crash />,
+        element: <Home />,
       },
       {
         path: "login",
@@ -46,24 +48,22 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormModal />
       },
-
-
       {
         path: "cornholes/:id",
-        element: <CornholeDetail />
+        element: <SingleCornhole />
       },
       {
         path: "/cornholes/new",
-        element: <CreateACornhole />
+        element: <AddCornhole />
       },
-      {
-        path: "cornholes/current",
-        element: <ManageCornholes />
-      },
-      {
-        path: "/cornholes/:id/edit",
-        element: <UpdateCornhole />
-      },
+      // {
+      //   path: "cornholes/current",
+      //   element: <ManageCornholes />
+      // },
+      // {
+      //   path: "/cornholes/:id/edit",
+      //   element: <UpdateCornhole />
+      // },
       {
 
 

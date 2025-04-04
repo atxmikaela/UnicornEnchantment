@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
-import cornholeReducer from './cornholes';
-import encounterReducer from './reviews';
+import cornholesReducer from './cornholes';
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  cornholes: cornholeReducer,
-  encounters: encounterReducer,
+  cornholesReducer,
+
   // ...
 });
 
@@ -17,8 +17,7 @@ if (import.meta.env.MODE === "production") {
 } else {
   const logger = (await import("redux-logger")).default;
   const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 }) || compose;
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 

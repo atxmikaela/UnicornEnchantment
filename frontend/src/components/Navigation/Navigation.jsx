@@ -20,7 +20,7 @@ function Navigation({ isLoaded }) {
 
         </div>
         <div className='title-wrapper'>
-          <h3><NavLink to="/">The Unicorn Experience</NavLink></h3>
+          <h3><NavLink to="/">Unicorn Encounters</NavLink></h3>
         </div>
         </div>
 

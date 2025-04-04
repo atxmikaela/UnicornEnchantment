@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { FaUserCircle, FaBars } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
 import { useNavigate, NavLink } from 'react-router-dom';
 import "./ProfileButton.css";
+import LoginFormModal from '../Modals/LoginFormModal/LoginFormModal';
+import SignupFormModal from '../Modals/SignupFormModal/SignupFormModal';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
