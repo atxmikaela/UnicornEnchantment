@@ -18,6 +18,9 @@
     "explorer.expandSingleFolderWorkspaces": true,
     "explorer.fileNesting.enabled": true,
     "explorer.openEditors.sortOrder": "editorOrder",
+    "accessibility.signals.save": {
+        "sound": "userGesture"
+    },
     "window.zoomLevel": 1,
     "window.autoDetectColorScheme": true,
     "workbench.editor.autoLockGroups": {

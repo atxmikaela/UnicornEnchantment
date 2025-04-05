@@ -53,15 +53,12 @@ export const getCornholesThunk = () => async (dispatch) => {
 
 export const getSingleCornholeThunk = (cornholeId) => async (dispatch) => {
   try {
-
     const res = await csrfFetch(`/api/spots/${cornholeId}`);
-
 
     if (res.ok) {
       const data = await res.json();
 
       dispatch(getSingleCornholeAction(data));
-
 
       return;
     } else {
@@ -73,45 +70,35 @@ export const getSingleCornholeThunk = (cornholeId) => async (dispatch) => {
   }
 };
 
-
-
-
-
-    // const encounterResponse = await csrfFetch(
-    //   `/api/spots/${cornId}/encounters`,
-    // );
+// const encounterResponse = await csrfFetch(
+//   `/api/spots/${cornId}/encounters`,
+// );
 
 //     return { cornhole: corn };
 //   } catch (error) {
 //     return error;
 
-
 export const createCornholesThunk = (cornhole) => async (dispatch) => {
   try {
     const options = {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cornhole)
-    }
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cornhole),
+    };
     const res = await csrfFetch(`/api/spots/`, options); // STEP 3 KINDA: Go to the route to see how the data is being retrieved/ processed in the route/ database
     if (res.ok) {
       const data = await res.json(); // STEP 5: Data goes back to thunk
       dispatch(getAllCornholesAction(data.Spots));
     } else {
-        const errorData = await res.json();
+      const errorData = await res.json();
       throw errorData;
     }
   } catch (error) {
     return error;
   }
 };
-
-
-
-
-
 
 // storing all cornholes by ID for o/1 time
 //initially tried also using an array to store them in order, but the indeces weren't synced with the ID's so I took an Object.keys approach.
@@ -142,13 +129,8 @@ const cornholesReducer = (state = initialState, action) => {
     }
     case GET_SINGLE_CORNHOLE: {
       const cornhole = action.payload;
-      newState = { ...state,
-          singleCornhole: {
-            ...state.singleCornhole,
-            [cornhole.id]: cornhole
-          },
-       };
-
+      newState = { ...state };
+      newState.byId = { [cornhole.id]: cornhole };
       return newState;
     }
     default:

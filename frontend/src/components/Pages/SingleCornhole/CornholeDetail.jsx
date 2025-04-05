@@ -13,9 +13,10 @@ const SingleCornhole = () => {
   const dispatch = useDispatch();
 //
   const { id } = useParams();
- 
 
-  const cornhole = useSelector((state) => state.cornholesReducer.singleCornhole);
+
+
+  const cornhole = useSelector((state) => state.cornholesReducer.byId[id]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -39,29 +40,51 @@ const SingleCornhole = () => {
         />
     );
 }
-      console.log(cornhole.previewImage)
-  return (
+    //since data is loaded for sure here since we are rending the else return...
+    //create two variables to determine if images are preview or spot images to render in dom.
+
+    let previewSpotImg;
+    let spotImg = []
+          for (const [key, value] of Object.entries(cornhole.SpotImages)) {
+          if (cornhole.SpotImages[key].preview === true){
+            previewSpotImg = cornhole.SpotImages[key].url;
+          } else {
+            spotImg.push(value);
+          }
+
+
+        }
+
+        console.log(spotImg)
+
+     return (
         <>
 
         <div className="cornhole-detail-page">
+        <div className="cornhole-boxed-page-wrapper">
 
-
-        <div className="cornhole-detail-page-container">
         <h1>{cornhole.name}</h1>
         <h3>{`${cornhole.city}, ${cornhole.state}, ${cornhole.country}`}</h3>
 
+        <div className="cornhole-detail-main-panels">
+
         <div className="left-panel">
-          <img src={cornhole.previewImage} className="detail-preview-image" />
+          <img src={previewSpotImg} className="detail-preview-image" />
         </div>
+
+
+
 
         <div className="right-panel">
-
+        {spotImg.map((image, idx) => (
+         <img key={idx} src={image.url} className="detail-images"></img>
+        ))}
         </div>
 
 
 
 
-
+        </div>
 
 
 
