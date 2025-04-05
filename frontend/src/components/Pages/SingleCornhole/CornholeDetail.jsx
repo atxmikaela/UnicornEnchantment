@@ -13,16 +13,9 @@ const SingleCornhole = () => {
   const dispatch = useDispatch();
 //
   const { id } = useParams();
+ 
 
-  console.log(typeof id, "WHAT IS THE ID TYPE");
-
-  const idInt = parseInt(id);
-
-  console.log(typeof idInt, "WHAT IS THE ID TYPE AFTER");
-
-
-
-  const cornhole = useSelector((state) => state.cornholesReducer.singleCornhole[idInt])
+  const cornhole = useSelector((state) => state.cornholesReducer.singleCornhole);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,6 +39,7 @@ const SingleCornhole = () => {
         />
     );
 }
+      console.log(cornhole.previewImage)
   return (
         <>
 
@@ -57,7 +51,7 @@ const SingleCornhole = () => {
         <h3>{`${cornhole.city}, ${cornhole.state}, ${cornhole.country}`}</h3>
 
         <div className="left-panel">
-          {/* <img src={cornhole.SpotImages} className="detail-preview-image" /> */}
+          <img src={cornhole.previewImage} className="detail-preview-image" />
         </div>
 
         <div className="right-panel">
