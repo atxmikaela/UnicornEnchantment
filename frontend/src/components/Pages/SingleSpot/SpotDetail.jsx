@@ -16,6 +16,7 @@ const SingleSpot = () => {
 
   const spot = useSelector((state) => state.spots.byId[id]);
   const reviews = useSelector((state) => state.spots.reviews);
+
   const sessionUser = useSelector((state) => state.session.user)
   const spotId = id;
 
@@ -67,7 +68,12 @@ const SingleSpot = () => {
       reviewPlural = "New";
     }
 
-
+    let spotOwner = false;
+    if (sessionUser) {
+    if(sessionUser.id === spot.ownerId){
+      spotOwner = true;
+    }
+  }
 
     return (
       <>
@@ -118,10 +124,9 @@ const SingleSpot = () => {
             <div className="post-review-button">
 
 
-            {sessionUser && (
-                   <OpenModalButton
-                   itemText="Post Your Review"
-                   modalComponent={<PostReviewModal spotId={spotId}/>}
+            {sessionUser && !spotOwner && (
+                   <OpenModalButton buttonText="Post Your Review"
+                   modalComponent={<PostReviewModal spotId={spotId} />}
                      />
             )}
 
@@ -130,7 +135,7 @@ const SingleSpot = () => {
               </div>
 
             <ul>
-              {reviews.map(reviews =>
+              {[...reviews].reverse().map(reviews =>
                 <li key={reviews.id}>
                   <ReviewCard reviews={reviews} />
                 </li>

@@ -102,7 +102,7 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
 
     if (res.ok) {
       const data = await res.json();
-      
+
       dispatch(getReviewsAction(data.Reviews));
 
       return;
@@ -162,7 +162,7 @@ export const updateSpotThunk = (spot) => async (dispatch) => {
 };
 
 export const addReviewThunk = (reviewData) => async (dispatch) => {
-    console.log(reviewData, ": IS THE REVIEW DATA BEING PASSED IN TO THE THUNK")
+
   try {
     const res = await csrfFetch('/api/reviews/', {
       method: 'POST',
@@ -171,11 +171,11 @@ export const addReviewThunk = (reviewData) => async (dispatch) => {
       },
       body: JSON.stringify(reviewData),
     });
-      console.log(reviewData, ": IS REVIEW DATA AT THE THUNKAROO");
+
     if (res.ok) {
       const data = await res.json();
       dispatch(addReviewAction(data));
-      console.log(data, ': IS THE DATA AFTER DISPATCH')
+
       return data;
     } else {
       const errorData = await res.json();
