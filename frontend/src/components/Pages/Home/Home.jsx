@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import CrashCard from "./CrashCard";
 import './Home.css';
-import { getCornholesThunk } from "../../../store/cornholes";
 import { useNavigate } from "react-router-dom";
+import { getSpotsThunk } from "../../../store/spots";
+import SpotCard from "./SpotCard";
 
 
 
@@ -13,24 +13,24 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const cornholes = useSelector((state) => state.cornholesReducer.allCornholes);
+  const spots = useSelector((state) => state.spots.allSpots);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-      const loadCornholes = async () => {
-       await dispatch(getCornholesThunk());
+      const loadSpots = async () => {
+       await dispatch(getSpotsThunk());
        setIsLoaded(true);
       };
 
   if (!isLoaded) {
 
-    loadCornholes();
+    loadSpots();
   }
 }, [dispatch, isLoaded]);
 
-    const goToCornholeDetail = (e, cornhole) => {
+    const goToSpotDetail = (e, spot) => {
       e.preventDefault();
-      navigate(`/cornholes/${cornhole.id}`)
+      navigate(`/spots/${spot.id}`)
     }
 
     if (!isLoaded) {
@@ -45,13 +45,13 @@ const Home = () => {
     return (
       <div>
         <h1>Welcome to Unicorn Encounters</h1>
-        <div className="cornhole-list-container">
-        {cornholes.map((cornhole, idx) => (
+        <div className="spot-list-container">
+        {spots.map((spot, idx) => (
           <div
-          className="cornhole-container"
-          key={`${idx}-${cornhole.id}`}
-          onClick={(e)=> goToCornholeDetail(e, cornhole)}>
-            <CrashCard cornhole={cornhole} />
+          className="spot-container"
+          key={`${idx}-${spot.id}`}
+          onClick={(e)=> goToSpotDetail(e, spot)}>
+            <SpotCard spot={spot} />
           </div>
         ))}
         </div>

@@ -2,7 +2,8 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createCornholesThunk } from '../../../store/cornholes';
+import { getSpotsThunk } from '../../../store/spots';
+
 
 
 
@@ -115,7 +116,7 @@ const AddCornhole = () => {
       };
 
 
-     const data = await dispatch(createCornholesThunk(cornhole))
+     const data = await dispatch(getSpotsThunk(cornhole))
     //avoid .thens  .then((data) => {
         console.log("Created cornhole ID:", data.id);
         reset();

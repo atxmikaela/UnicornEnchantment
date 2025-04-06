@@ -11,20 +11,28 @@ STEP 1 AND 2
 import { csrfFetch } from './csrf';
 
 // Action constants
-//DO NOT TOUCH THIS CODE
-const GET_ALL_CORNHOLES = 'cornholes/getAllCornholes';
-const GET_SINGLE_CORNHOLE = 'cornholes/getSingleCornhole';
+
+//CODE IS IN CORRECT FORMAT
+const GET_ALL_SPOTS = 'spots/getAllSpots';
+const GET_SINGLE_SPOT = 'spots/getSingleSpot';
+const GET_REVIEWS = 'spots/getReviews';
 
 // Action creators // STEP 6. In charge of packaging up our data using an object with type and payload
-//DO NOT TOUCH THIS CODE
-const getAllCornholesAction = (corn) => ({
-  type: GET_ALL_CORNHOLES,
-  payload: corn,
+
+// CODE IS IN CORRECT FORMAT
+const getAllSpotsAction = (spots) => ({
+  type: GET_ALL_SPOTS,
+  payload: spots,
 });
 
-const getSingleCornholeAction = (cornhole) => ({
-  type: GET_SINGLE_CORNHOLE,
-  payload: cornhole,
+const getSingleSpotAction = (spot) => ({
+  type: GET_SINGLE_SPOT,
+  payload: spot,
+});
+
+const getReviewsAction = (reviews) => ({
+  type: GET_REVIEWS,
+  payload: reviews,
 });
 
 /* STEP 3: THUNKS
@@ -35,12 +43,12 @@ Component that is currently mounted on the browser -> This is the react file tha
 
 */
 // DO NOT TOUCH THIS CODE
-export const getCornholesThunk = () => async (dispatch) => {
+export const getSpotsThunk = () => async (dispatch) => {
   try {
     const res = await csrfFetch('/api/spots');
     if (res.ok) {
       const data = await res.json();
-      dispatch(getAllCornholesAction(data.Spots));
+      dispatch(getAllSpotsAction(data.Spots));
       return;
     } else {
       const errorData = await res.json();
@@ -51,17 +59,14 @@ export const getCornholesThunk = () => async (dispatch) => {
   }
 };
 
-export const getSingleCornholeThunk = (cornholeId) => async (dispatch) => {
+export const getSingleSpotThunk = (spotId) => async (dispatch) => {
   try {
-
-    const res = await csrfFetch(`/api/spots/${cornholeId}`);
-
+    const res = await csrfFetch(`/api/spots/${spotId}`);
 
     if (res.ok) {
       const data = await res.json();
 
-      dispatch(getSingleCornholeAction(data));
-
+      dispatch(getSingleSpotAction(data));
 
       return;
     } else {
@@ -73,45 +78,26 @@ export const getSingleCornholeThunk = (cornholeId) => async (dispatch) => {
   }
 };
 
-
-
-
-
-    // const encounterResponse = await csrfFetch(
-    //   `/api/spots/${cornId}/encounters`,
-    // );
-
-//     return { cornhole: corn };
-//   } catch (error) {
-//     return error;
-
-
-export const createCornholesThunk = (cornhole) => async (dispatch) => {
+export const getReviewsThunk = (spotId) => async (dispatch) => {
   try {
-    const options = {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cornhole)
-    }
-    const res = await csrfFetch(`/api/spots/`, options); // STEP 3 KINDA: Go to the route to see how the data is being retrieved/ processed in the route/ database
+    const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+
     if (res.ok) {
-      const data = await res.json(); // STEP 5: Data goes back to thunk
-      dispatch(getAllCornholesAction(data.Spots));
+      const data = await res.json();
+      console.log(data, "IS THE DATA")
+
+      dispatch(getReviewsAction(data.Reviews));
+
+      return;
     } else {
-        const errorData = await res.json();
+      const errorData = await res.json();
       throw errorData;
     }
   } catch (error) {
     return error;
   }
 };
-
-
-
-
-
 
 // storing all cornholes by ID for o/1 time
 //initially tried also using an array to store them in order, but the indeces weren't synced with the ID's so I took an Object.keys approach.
@@ -122,33 +108,35 @@ export const createCornholesThunk = (cornhole) => async (dispatch) => {
 
 // DO NOT TOUCH THIS CODE
 const initialState = {
-  allCornholes: [],
+  allSpots: [],
   byId: {},
+  reviews: [],
 };
 // DO NOT TOUCH THIS CODE
-const cornholesReducer = (state = initialState, action) => {
+const spotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case GET_ALL_CORNHOLES: {
-      const cornholesArr = action.payload;
+    case GET_ALL_SPOTS: {
+      const spotsArr = action.payload;
       newState = { ...state };
-      newState.allCornholes = cornholesArr;
-      let newByIdGetAllCornholes = {};
-      for (let cornhole of cornholesArr) {
-        newByIdGetAllCornholes[cornhole.id] = cornhole;
+      newState.allSpots = spotsArr;
+      let newByIdGetAllSpots = {};
+      for (let spot of spotsArr) {
+        newByIdGetAllSpots[spot.id] = spot;
       }
-      newState.byId = newByIdGetAllCornholes;
+      newState.byId = newByIdGetAllSpots;
       return newState;
     }
-    case GET_SINGLE_CORNHOLE: {
-      const cornhole = action.payload;
-      newState = { ...state,
-          singleCornhole: {
-            ...state.singleCornhole,
-            [cornhole.id]: cornhole
-          },
-       };
-
+    case GET_SINGLE_SPOT: {
+      const spot = action.payload;
+      newState = { ...state };
+      newState.byId = { [spot.id]: spot };
+      return newState;
+    }
+    case GET_REVIEWS: {
+      const reviewArr = action.payload;
+      newState = { ...state };
+      newState.reviews = reviewArr;
       return newState;
     }
     default:
@@ -156,4 +144,4 @@ const cornholesReducer = (state = initialState, action) => {
   }
 };
 // DO NOT TOUCH THIS CODE
-export default cornholesReducer;
+export default spotReducer;

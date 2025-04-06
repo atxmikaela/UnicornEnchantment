@@ -4,10 +4,9 @@ import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import * as sessionActions from '../src/store/session';
 import Home from './components/Pages/Home';
-import AddCornhole from './components/Pages/AddCornhole/AddCornhole';
-import SingleCornhole from './components/Pages/SingleCornhole';
 import LoginFormModal from './components/Modals/LoginFormModal';
 import SignupFormModal from './components/Modals/SignupFormModal';
+import SingleSpot from './components/Pages/SingleSpot/SpotDetail';
 
 
 
@@ -49,20 +48,20 @@ const router = createBrowserRouter([
         element: <SignupFormModal />
       },
       {
-        path: "cornholes/:id",
-        element: <SingleCornhole />
-      },
-      {
-        path: "/cornholes/new",
-        element: <AddCornhole />
+        path: "spots/:id",
+        element: <SingleSpot />
       },
       // {
-      //   path: "cornholes/current",
-      //   element: <ManageCornholes />
+      //   path: "/spots/new",
+      //   element: <AddSpot />
       // },
       // {
-      //   path: "/cornholes/:id/edit",
-      //   element: <UpdateCornhole />
+      //   path: "spots/current",
+      //   element: <ManageSpots />
+      // },
+      // {
+      //   path: "/spots/:id/edit",
+      //   element: <UpdateSpots />
       // },
       {
 

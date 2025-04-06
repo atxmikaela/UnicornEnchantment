@@ -7,7 +7,7 @@
 }
 
 
-.cornhole-list-container{
+.spot-list-container{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -17,7 +17,7 @@
 }
 
 
-.cornhole-container{
+.spot-container{
     cursor: pointer;
 
 }
