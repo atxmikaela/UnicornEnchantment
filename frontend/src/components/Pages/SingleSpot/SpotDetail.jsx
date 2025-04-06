@@ -60,12 +60,12 @@ const SingleSpot = () => {
 
     const stars = spot.avgStarRating
 
+    const hasReviews = reviews.length > 0;
+    const noReviews = reviews.length < 1;
+
     let reviewPlural = "reviews";
     if (spot.numReviews === 1) {
       reviewPlural = "review"
-    } else if (spot.numReviews === 0) {
-      spot.numReviews = "";
-      reviewPlural = "New";
     }
 
     let spotOwner = false;
@@ -110,7 +110,8 @@ const SingleSpot = () => {
 
             <div className="price-reviews">
               <h1>{`$${spot.price}`}</h1><p>night</p>
-              <p>★{stars} - {spot.numReviews} {reviewPlural}</p>
+              {hasReviews &&(<p>★{stars} · {spot.numReviews} {reviewPlural}</p>)}
+              {noReviews && (<p>★New</p>)}
               <button onClick={() => {
                 alert("Feature Coming Soon...");
               }}>Reserve</button>
@@ -119,7 +120,12 @@ const SingleSpot = () => {
 
           </div>
           <div className="review-section">
-            <h1>★ {stars} - {spot.numReviews} {reviewPlural}</h1>
+            {hasReviews && (
+            <h1>★ {stars} · {spot.numReviews} {reviewPlural}</h1>
+            )}
+            {noReviews && (
+            <h1>★ New</h1>
+            )}
 
             <div className="post-review-button">
 
@@ -134,13 +140,19 @@ const SingleSpot = () => {
 
               </div>
 
+           {hasReviews && (
             <ul>
+
               {[...reviews].reverse().map(reviews =>
                 <li key={reviews.id}>
                   <ReviewCard reviews={reviews} />
                 </li>
               )}
             </ul>
+           )}
+           {noReviews && (
+            <h1>Be the first to post a review!</h1>
+           )}
           </div>
         </div>
       </>

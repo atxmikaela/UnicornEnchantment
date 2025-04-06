@@ -9,6 +9,7 @@ import SignupFormModal from './components/Modals/SignupFormModal';
 import SingleSpot from './components/Pages/SingleSpot/SpotDetail';
 import AddSpot from './components/Pages/AddSpot';
 import UpdateSpot from './components/Pages/UpdateSpot';
+import ManageSpots from './components/Pages/ManageSpots';
 
 
 
@@ -57,10 +58,10 @@ const router = createBrowserRouter([
         path: "/spots/new",
         element: <AddSpot />
       },
-      // {
-      //   path: "spots/current",
-      //   element: <ManageSpots />
-      // },
+      {
+        path: "spots/current",
+        element: <ManageSpots />
+      },
       {
         path: "/spots/:id/edit",
         element: <UpdateSpot />
