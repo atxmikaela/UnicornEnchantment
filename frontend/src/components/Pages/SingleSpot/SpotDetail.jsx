@@ -4,6 +4,9 @@ import './SpotDetail.css';
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { getReviewsThunk, getSingleSpotThunk } from "../../../store/spots";
+import OpenModalButton from "../../Modals/OpenModalButton/OpenModalButton";
+import PostReviewModal from "../../Modals/PostReviewModal/PostReviewModal";
+
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
@@ -13,6 +16,11 @@ const SingleSpot = () => {
 
   const spot = useSelector((state) => state.spots.byId[id]);
   const reviews = useSelector((state) => state.spots.reviews);
+  const sessionUser = useSelector((state) => state.session.user)
+  const spotId = id;
+
+
+
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -38,8 +46,6 @@ const SingleSpot = () => {
       />
     );
   } else {
-    //since data is loaded for sure here since we are rending the else return...
-    //create two variables to determine if images are preview or spot images to render in dom.
 
     let previewSpotImg;
     let spotImg = []
@@ -50,6 +56,18 @@ const SingleSpot = () => {
         spotImg.push(value);
       }
     }
+
+    const stars = spot.avgStarRating
+
+    let reviewPlural = "reviews";
+    if (spot.numReviews === 1) {
+      reviewPlural = "review"
+    } else if (spot.numReviews === 0) {
+      spot.numReviews = "";
+      reviewPlural = "New";
+    }
+
+
 
     return (
       <>
@@ -74,42 +92,52 @@ const SingleSpot = () => {
               </div>
             </div>
 
-            <div className="hosted-by">
+            <div className="middle-section">
+              <div className="hosted-by">
 
               <h1>{`Hosted by ${spot.Owner.firstName} ${spot.Owner.lastName}`}</h1>
+
+              <p>{spot.description}</p>
+              </div>
+
+
+
+            <div className="price-reviews">
+              <h1>{`$${spot.price}`}</h1><p>night</p>
+              <p>★{stars} - {spot.numReviews} {reviewPlural}</p>
+              <button onClick={() => {
+                alert("Feature Coming Soon...");
+              }}>Reserve</button>
             </div>
-            <p>{spot.description}</p>
+            </div>
+
+          </div>
+          <div className="review-section">
+            <h1>★ {stars} - {spot.numReviews} {reviewPlural}</h1>
+
+            <div className="post-review-button">
+
+
+            {sessionUser && (
+                   <OpenModalButton
+                   itemText="Post Your Review"
+                   modalComponent={<PostReviewModal spotId={spotId}/>}
+                     />
+            )}
+
+
+
+              </div>
+
+            <ul>
+              {reviews.map(reviews =>
+                <li key={reviews.id}>
+                  <ReviewCard reviews={reviews} />
+                </li>
+              )}
+            </ul>
           </div>
         </div>
-
-        <div className="price-reviews">
-
-          <h1>{`$${spot.price}`}</h1><p>night</p>
-          <p>{`${spot.avgStarRating} - ${spot.numReviews} reviews`}</p>
-          <button className="reserve-button">Reserve</button>
-
-
-        </div>
-
-        <div className="review-section">
-          <h1>Star {spot.avgStarRating} - {spot.numReviews} Reviews</h1>
-
-          {reviews.map(reviews =>
-            <li key={reviews.id}>
-              <ReviewCard reviews={reviews} spot={spot} />
-            </li>
-          )}
-
-
-
-
-
-
-
-
-
-        </div>
-
       </>
     );
   }

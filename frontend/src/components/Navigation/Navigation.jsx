@@ -29,7 +29,7 @@ function Navigation({ isLoaded }) {
         <ul>
             {isLoaded && sessionUser && (
               <li>
-          <h3><NavLink className="create-cornhole-text" to="/cornholes/new">Create a New Cornhole</NavLink></h3>
+          <h3><NavLink className="create-spot-text" to="/spots/new">Create a New Spot</NavLink></h3>
           </li>
             )}
           </ul>

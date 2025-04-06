@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import * as sessionActions from '../../../store/session';
 import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../../context/Modal'
 import { useModal } from '../../../context/Modal';
 import './LoginFormModal.css';
+
 
 
 function LoginFormModal() {
@@ -65,7 +66,6 @@ function LoginFormModal() {
             required
           />
         </label>
-        <p></p>
         <label>
           Password
           <input
@@ -79,14 +79,12 @@ function LoginFormModal() {
           <p>{errors.credential}</p>
         )}
         <button type="submit" disabled={disabledLogin}>Log In</button>
-
       </form>
-      <button href='#' onClick={(e) => {
-      // <a href='#' onClick={(e) => {
+      <a href='#' onClick={(e) => {
         e.preventDefault();
         handleDemoLogin(e);
       }} className='demo-login'>
-        Log in as Demo User</button>
+        Log in as Demo User</a>
 
       </div>
     </>

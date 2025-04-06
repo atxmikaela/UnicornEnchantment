@@ -51,7 +51,7 @@
 
 }
 
-.hosted-by{
+.middle-section{
     display: grid;
     grid-template-columns: 1.3fr .7fr;
 }

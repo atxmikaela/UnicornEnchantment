@@ -5,10 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { getSpotsThunk } from "../../../store/spots";
 import SpotCard from "./SpotCard";
 
-
-
-
-
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

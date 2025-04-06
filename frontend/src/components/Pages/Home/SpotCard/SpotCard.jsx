@@ -5,16 +5,13 @@ export default function SpotCard ({spot}) {
 
 
 
-  let avgRating2d;
-
-if (spot.avgRating !== null) {
-  avgRating2d = spot.avgRating
-} else {
-  spot.avgRating = "New";
-}
+  const avgRatingNum = spot.avgRating
 
 
 
+
+
+console.log(typeof spot.avgRating);
 
   return (
     <div className="card-container">
@@ -23,7 +20,7 @@ if (spot.avgRating !== null) {
       </div>
       <div className='title-container spot-text'>
         <span>{`${spot.city}, ${spot.state}`} </span>
-        <span>{`${avgRating2d}`} </span>
+        <span>{`${avgRatingNum}`} </span>
 
       </div>
 

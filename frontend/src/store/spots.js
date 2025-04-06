@@ -16,6 +16,9 @@ import { csrfFetch } from './csrf';
 const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_SINGLE_SPOT = 'spots/getSingleSpot';
 const GET_REVIEWS = 'spots/getReviews';
+const ADD_SPOT = 'spots/addSpot';
+const UPDATE_SPOT = 'spots/updateSpot';
+const ADD_REVIEW = 'reviews/addReview';
 
 // Action creators // STEP 6. In charge of packaging up our data using an object with type and payload
 
@@ -33,6 +36,21 @@ const getSingleSpotAction = (spot) => ({
 const getReviewsAction = (reviews) => ({
   type: GET_REVIEWS,
   payload: reviews,
+});
+
+const addSpotAction = (spot) => ({
+  type: ADD_SPOT,
+  payload: spot,
+});
+
+const updateSpotAction = (spot) => ({
+  type: UPDATE_SPOT,
+  payload: spot,
+});
+
+const addReviewAction = (review) => ({
+  type: ADD_REVIEW,
+  payload: review,
 });
 
 /* STEP 3: THUNKS
@@ -82,11 +100,9 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
   try {
     const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
-
     if (res.ok) {
       const data = await res.json();
-      console.log(data, "IS THE DATA")
-
+      
       dispatch(getReviewsAction(data.Reviews));
 
       return;
@@ -99,8 +115,76 @@ export const getReviewsThunk = (spotId) => async (dispatch) => {
   }
 };
 
-// storing all cornholes by ID for o/1 time
-//initially tried also using an array to store them in order, but the indeces weren't synced with the ID's so I took an Object.keys approach.
+export const addSpotThunk = (spot) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/spots/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(spot),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(addSpotAction(data));
+      return data;
+    } else {
+      const errorData = await res.json();
+      throw errorData;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateSpotThunk = (spot) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/spots/${spot.id}/edit/`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(spot),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(updateSpotAction(data));
+      return data;
+    } else {
+      const errorData = await res.json();
+      throw errorData;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+export const addReviewThunk = (reviewData) => async (dispatch) => {
+    console.log(reviewData, ": IS THE REVIEW DATA BEING PASSED IN TO THE THUNK")
+  try {
+    const res = await csrfFetch('/api/reviews/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reviewData),
+    });
+      console.log(reviewData, ": IS REVIEW DATA AT THE THUNKAROO");
+    if (res.ok) {
+      const data = await res.json();
+      dispatch(addReviewAction(data));
+      console.log(data, ': IS THE DATA AFTER DISPATCH')
+      return data;
+    } else {
+      const errorData = await res.json();
+      throw errorData;
+    }
+  } catch (error) {
+    return error;
+  }
+};
 
 // STEP 7 CONTINUED ON STORE PAGE WHEN REDUCER IS PASSED TO IT
 
@@ -139,9 +223,22 @@ const spotReducer = (state = initialState, action) => {
       newState.reviews = reviewArr;
       return newState;
     }
+    case ADD_SPOT: {
+      newState = { ...state };
+      return newState;
+    }
+    case UPDATE_SPOT: {
+      newState = { ...state };
+      return newState;
+    }
+    case ADD_REVIEW: {
+      newState = { ...state };
+      return newState;
+    }
     default:
       return state;
   }
 };
+
 // DO NOT TOUCH THIS CODE
 export default spotReducer;
