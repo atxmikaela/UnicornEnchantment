@@ -70,7 +70,7 @@ const PostReviewModal = ({ spotId }) => {
         </label>
           Stars
         {errors.stars && <p>{errors.stars}</p>}
-        <button type="submit" disabled={disabledButton}>Submit Your Review</button>
+        <button type="submit" disabled={disabledButton}></button>
       </form>
       </div>
     </>

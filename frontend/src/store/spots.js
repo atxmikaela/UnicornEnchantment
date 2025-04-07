@@ -19,6 +19,7 @@ const GET_REVIEWS = 'spots/getReviews';
 const ADD_SPOT = 'spots/addSpot';
 const UPDATE_SPOT = 'spots/updateSpot';
 const ADD_REVIEW = 'reviews/addReview';
+const DELETE_SPOT = 'spots/deleteSpot';
 
 // Action creators // STEP 6. In charge of packaging up our data using an object with type and payload
 
@@ -51,6 +52,11 @@ const updateSpotAction = (spot) => ({
 const addReviewAction = (review) => ({
   type: ADD_REVIEW,
   payload: review,
+});
+
+const deleteSpotAction = (spotId) => ({
+  type: DELETE_SPOT,
+  payload: spotId,
 });
 
 /* STEP 3: THUNKS
@@ -186,6 +192,27 @@ export const addReviewThunk = (reviewData) => async (dispatch) => {
   }
 };
 
+export const deleteSpotThunk = ({spotId}) => async (dispatch) => {
+  console.log(spotId, "IS THE DATA BEING PASSED IN TO THE THUNK")
+  try {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+      method: 'DELETE'
+    })
+    console.log(spotId, "IS THE DATA BEING PASSED IN TO THE THUNK")
+    if (res.ok) {
+      const data = await res.json();
+    dispatch(deleteSpotAction());
+    console.log(data, "IS THE RESPONSE FROM THE SERVER")
+    return data;
+    } else {
+      const errorData = await res.json();
+      throw errorData;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 // STEP 7 CONTINUED ON STORE PAGE WHEN REDUCER IS PASSED TO IT
 
 // 7. In charge of placing our data into the store (Anthony calls this Big Dawg or Grand daddy reducer)
@@ -235,6 +262,11 @@ const spotReducer = (state = initialState, action) => {
       newState = { ...state };
       return newState;
     }
+    case DELETE_SPOT: {
+      newState = { ...state };
+      return newState.filter((spot) => spot.id !== action.payload);
+    }
+
     default:
       return state;
   }

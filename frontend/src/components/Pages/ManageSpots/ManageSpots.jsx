@@ -1,90 +1,96 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './../Home/Home.css';
-import { useNavigate } from "react-router-dom";
-import SpotCard from "./../Home/SpotCard";
+import { NavLink, useNavigate } from 'react-router-dom';
 import { getSpotsThunk } from "../../../store/spots";
+
+import "./ManageSpots.css";
+import SpotCard from "../Home/SpotCard";
 import OpenModalButton from "../../Modals/OpenModalButton/OpenModalButton";
 import DeleteSpotModal from "../../Modals/DeleteSpotModal";
 
 
 const ManageSpots = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spots = useSelector((state) => state.spots.allSpots);
+    const spots = useSelector((state) => state.spots.allSpots);
+  const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
-  const sessionUserId = useSelector((state) => state.session.user.id);
-  const spotId = spots.id;
+
+
 
   useEffect(() => {
-      const loadSpots = async () => {
-       await dispatch(getSpotsThunk());
-       setIsLoaded(true);
-      };
-
-  if (!isLoaded) {
-
-    loadSpots();
-
-
-
-
-
-  }
-}, [dispatch, isLoaded]);
-
-    const goToSpotDetail = (e, spot) => {
-      e.preventDefault();
-      navigate(`/spots/${spot.id}`)
-    }
-
-
+    const getSpots = async () => {
+      await dispatch(getSpotsThunk());
+      setIsLoaded(true);
+    };
 
     if (!isLoaded) {
-      return (
-        <img
+      getSpots();
+    }
+  }, [dispatch, isLoaded]);
+
+  const goToSpotDetail = (e, spot) => {
+    e.preventDefault();
+    navigate(`/spots/${spot.id}`);
+  };
+
+  const editSpot = (spotId) => {
+    navigate(`/spots/${spotId}/edit`);
+  };
+
+
+
+  if (!isLoaded) {
+    return (
+      <img
         src="https://media.tenor.com/WRNhKC63kkgAAAAM/loading-buffering.gif"
-      style={{ height: "100px" }}
+        style={{ height: "100px" }}
         alt="Loading..."
       />
     );
   } else {
 
+    const userSpots = spots.filter(spot => spot.ownerId === sessionUser.id);
 
-    const userSpots = spots.filter(spot => spot.ownerId === sessionUserId);
 
-   return (
+
+
+    return (
       <div>
+        <h1 className="title">Manage your Spots</h1>
+        {userSpots && userSpots.length > 0 ? (
+          <div className="card-list-container">
+            {userSpots.map((spot, idx) => (
+              <div
+                className="card-container"
+                key={`${idx}-${spot.id}`}>
+                <div onClick={(e) => goToSpotDetail(e, spot)}>
+                <SpotCard spot={spot}/>
+              </div>
 
-        <h1>Manage Your Spots</h1>
-        {userSpots && (
-        <div className="spot-list-container">
-        {userSpots.map((spot, idx) => (
-          <div
-          className="spot-container"
-          key={`${idx}-${sessionUserId}`}
-          onClick={(e)=> goToSpotDetail(e, spot)}>
-            <SpotCard spot={spot} />
-            <a href="/spots/new"><button>Update</button></a>
-            <OpenModalButton buttonText="Delete"
-            modalComponent={<DeleteSpotModal spotId={spotId} />}/>
-          </div>
+      <div className="card-buttons">
+                <button onClick={() => editSpot(spot.id)}>Update</button>
+                <OpenModalButton
+                 buttonText="Delete"
+                 modalComponent={<DeleteSpotModal spotId={spot.id} />}
+                 />
+              </div>
 
-        ))}
 
-        </div>
-        )}
-        {!userSpots && (
-            <button href="/spots/new">Create a New Spot</button>
-        )}
-      </div>
-    );
-  }
+
+            </div>
+           ))}
+           </div>
+         ) : (
+           <div className="no-spots">
+             <h2><NavLink to="/spots/new">Create a new Spot</NavLink></h2>
+           </div>
+         )}
+
+
+    </div>
+  );
 }
-
-
-
-
+};
 export default ManageSpots;

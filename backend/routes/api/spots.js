@@ -558,7 +558,7 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
 
 
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
-  const spotId = req.params.spotId;
+  const {spotId} = req.params;
   const ownerId = req.user.id;
 
   try {

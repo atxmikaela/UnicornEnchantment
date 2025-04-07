@@ -1,17 +1,6 @@
-import './SpotCard.css';
-
-
 export default function SpotCard ({spot}) {
 
-
-
   const avgRatingNum = spot.avgRating
-
-
-
-
-
-console.log(typeof spot.avgRating);
 
   return (
     <div className="card-container">
@@ -35,7 +24,13 @@ console.log(typeof spot.avgRating);
 
       </div>
 
-</div>
 
-      )
-    }
+      </div>
+
+
+
+
+
+
+
+      )}
