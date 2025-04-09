@@ -9,11 +9,12 @@ import OpenModalButton from "../../Modals/OpenModalButton/OpenModalButton";
 import DeleteSpotModal from "../../Modals/DeleteSpotModal";
 
 
+
 const ManageSpots = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-    const spots = useSelector((state) => state.spots.allSpots);
+    const spots = useSelector((state) => state.spots.all);
   const sessionUser = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
 

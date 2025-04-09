@@ -10,6 +10,8 @@ import SingleSpot from './components/Pages/SingleSpot/SpotDetail';
 import AddSpot from './components/Pages/AddSpot';
 import UpdateSpot from './components/Pages/UpdateSpot';
 import ManageSpots from './components/Pages/ManageSpots';
+import ManageReviews from './components/Pages/ManageReviews';
+
 
 
 
@@ -67,8 +69,10 @@ const router = createBrowserRouter([
         element: <UpdateSpot />
       },
       {
-
-
+        path: "/reviews/current",
+        element: <ManageReviews />
+      },
+      {
         path: "*",
         element: <h1>Where you going? You are going to get abducted!</h1>
       },

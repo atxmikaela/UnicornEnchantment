@@ -1,8 +1,13 @@
+import { useSelector } from "react-redux";
+import OpenModalButton from "../../../Modals/OpenModalButton/OpenModalButton";
+import '../../../Modals/Modal.css';
+import DeleteReviewModal from "../../../Modals/DeleteReviewModal";
+
 
 
 const ReviewCard = ({reviews}) => {
 
-
+    const user = useSelector((state) => state.session.user);
     const monthDate = new Date(reviews.createdAt);
     const monthTwoDigit = monthDate.getMonth();
     const year = monthDate.getFullYear();
@@ -22,6 +27,12 @@ const ReviewCard = ({reviews}) => {
     }
     const month = monthNames[monthTwoDigit]
 
+    let userReviewed = null;
+
+    if(reviews.userId === user.id){
+        userReviewed = true;
+    }
+
 
 
 return (
@@ -29,6 +40,11 @@ return (
     <h3>{reviews.User.firstName}</h3>
     <h4>{month} {year}</h4>
     <p>{reviews.review}</p>
+    <div className="delete-button-wrapper">
+    {userReviewed && (
+        <OpenModalButton buttonText="Delete"
+        modalComponent={<DeleteReviewModal review={reviews} />} />
+    )}</div>
 </div>
 )
 

@@ -9,6 +9,7 @@ import { Modal, ModalProvider } from './context/Modal';
 import configureStore from './store';
 
 
+
 const store = configureStore();
 
 
@@ -19,6 +20,7 @@ if (import.meta.env.MODE !== 'production') {
   window.csrfFetch = csrfFetch;
   window.store = store;
   window.sessionActions = sessionActions;
+
 }
 
 

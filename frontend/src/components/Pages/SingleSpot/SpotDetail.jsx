@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import './SpotDetail.css';
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
-import { getReviewsThunk, getSingleSpotThunk } from "../../../store/spots";
+import { getSingleSpotThunk } from "../../../store/spots";
 import OpenModalButton from "../../Modals/OpenModalButton/OpenModalButton";
 import PostReviewModal from "../../Modals/PostReviewModal/PostReviewModal";
+import { getReviewsBySpotThunk } from "../../../store/reviews";
+
 
 
 const SingleSpot = () => {
@@ -15,7 +17,7 @@ const SingleSpot = () => {
 
 
   const spot = useSelector((state) => state.spots.byId[id]);
-  const reviews = useSelector((state) => state.spots.reviews);
+  const reviews = useSelector((state) => state.reviews.all);
 
   const sessionUser = useSelector((state) => state.session.user)
   const spotId = id;
@@ -28,7 +30,7 @@ const SingleSpot = () => {
   useEffect(() => {
     const getSpot = async () => {
       await dispatch(getSingleSpotThunk(id));
-      await dispatch(getReviewsThunk(id));
+      await dispatch(getReviewsBySpotThunk(id));
       setIsLoaded(true);
     };
 
@@ -145,7 +147,7 @@ const SingleSpot = () => {
 
               {[...reviews].reverse().map(reviews =>
                 <li key={reviews.id}>
-                  <ReviewCard reviews={reviews} />
+                  <ReviewCard reviewId={reviews.id} />
                 </li>
               )}
             </ul>

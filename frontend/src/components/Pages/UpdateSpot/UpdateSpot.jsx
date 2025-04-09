@@ -1,20 +1,30 @@
 
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { updateSpotThunk } from '../../../store/spots';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getSingleSpotThunk, updateSpotThunk } from '../../../store/spots';
 import '../AddSpot/AddSpot.css';
 
 
 
 
 const UpdateSpot = () => {
+
+  const { spid } = useParams();
+
+
+
+  const oldSpot = useSelector((state) => state.spots.byId[spid]);
+
+  console.log(oldSpot, "old spot")
+
+
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [lat, setLat] = useState();
-  const [lng, setLng] = useState();
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -26,10 +36,39 @@ const UpdateSpot = () => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    // has to be async
+
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const getSpot = async () => {
+      await dispatch(getSingleSpotThunk(spid));
+      setIsLoaded(true);
+    };
+
+    if (!isLoaded) {
+      getSpot();
+    }
+  }, [dispatch, spid, isLoaded]);
+
+
+  if (!isLoaded || !spid) {
+    return (
+      <img
+        src="https://media.tenor.com/WRNhKC63kkgAAAAM/loading-buffering.gif"
+        style={{ height: "100px" }}
+        alt="Loading..."
+      />
+    );
+  } else {
+
+
+  // has to be async
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
+
+    //FIGURE OUT HOW TO GET RID OF THIS
     const imageRegex = /\.(png|jpe?g)$/i;
 
     if (!country) {
@@ -113,16 +152,15 @@ const UpdateSpot = () => {
         fourthSpotImg,
       };
 
-
-     const data = await dispatch(updateSpotThunk(spot))
-    //avoid .thens  .then((data) => {
-        console.log("Created spot ID:", data.id);
-        reset();
-        navigate(`/spots/${data.id}`);
-    } else {
-      return;
-    }
-  };
+      const data = await dispatch(updateSpotThunk(spot))
+      //avoid .thens  .then((data) => {
+          console.log("Created spot ID:", data.id);
+          reset();
+          navigate(`/spots/${data.id}`);
+      } else {
+        return;
+      }
+    };
 
   const reset = () => {
     setCountry('');
@@ -148,7 +186,7 @@ const UpdateSpot = () => {
       <p>Guests will only get your exact address once they booked a reservation</p>
       <form onSubmit={handleSubmit}>
         <label>
-        {errors.country && <div className="error-message">{errors.country}</div>}
+        {errors.country ? <div className="error-message">{errors.country}</div>: null }
           <input
             type="text"
             onChange={(e) => setCountry(e.target.value)}
@@ -158,7 +196,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-        <p></p>{errors.address && <div className="error-message">{errors.address}</div>}
+        <p></p>{errors.address ? <div className="error-message">{errors.address}</div>: null}
           <input
             type="text"
             onChange={(e) => setAddress(e.target.value)}
@@ -168,7 +206,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-        <p></p>{errors.city && <div className="error-message">{errors.city}</div>}
+        <p></p>{errors.city ? <div className="error-message">{errors.city}</div>: null}
           <input
             type="text"
             onChange={(e) => setCity(e.target.value)}
@@ -178,7 +216,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-        <p></p>{errors.state && <div className="error-message">{errors.state}</div>}
+        <p></p>{errors.state ? <div className="error-message">{errors.state}</div>: null}
           <input
             type="text"
             onChange={(e) => setState(e.target.value)}
@@ -188,7 +226,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-        <p></p>{errors.latitude && <div className="error-message">{errors.latitude}</div>}
+        <p></p>{errors.lat ? <div className="error-message">{errors.lat}</div>: null}
           <input
             type="text"
             onChange={(e) => setLat(e.target.value)}
@@ -198,7 +236,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-        <p></p>{errors.longitude && <div className="error-message">{errors.longitude}</div>}
+        <p></p>{errors.lng ? <div className="error-message">{errors.lng}</div>: null}
           <input
             type="text"
             onChange={(e) => setLng(e.target.value)}
@@ -210,7 +248,7 @@ const UpdateSpot = () => {
         <label>
           <h2>Describe your spot to guests</h2>
           <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
-          {errors.description && <div className="error-message">{errors.description}</div>}
+          {errors.description ? <div className="error-message">{errors.description}</div>: null}
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -222,7 +260,7 @@ const UpdateSpot = () => {
         <label>
           <h2>Create a title for your spot</h2>
           <p>Catch guests&apos; attention with a spot title that highlights what makes your spot special.</p>
-          {errors.name && <div className="error-message">{errors.name}</div>}
+          {errors.name ? <div className="error-message">{errors.name}</div>: null}
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -234,7 +272,7 @@ const UpdateSpot = () => {
         <label>
           <h2>Set a base price for your spot</h2>
           <p>Competitive pricing can help your spot stand out and rank higher in search results.</p>
-          {errors.price && <div className="error-message">{errors.price}</div>}
+          {errors.price ? <div className="error-message">{errors.price}</div>: null}
           $
           <input
             type="text"
@@ -247,7 +285,7 @@ const UpdateSpot = () => {
         <label>
           <h2>Liven up your spot with photos</h2>
           <p>Submit a link to at least one photo to publish your spot.</p>
-          {errors.previewImage && <div className="error-message">{errors.previewImage}</div>}
+          {errors.previewImage ? <div className="error-message">{errors.previewImage}</div>: null}
           <input
             type="text"
             onChange={(e) => setPreviewImage(e.target.value)}
@@ -257,7 +295,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-          <p></p>{errors.firstSpotImg && <div className="error-message">{errors.firstSpotImg}</div>}
+          <p></p>{errors.firstSpotImg ? <div className="error-message">{errors.firstSpotImg}</div>: null}
           <input
             type="text"
             onChange={(e) => setFirstSpotImg(e.target.value)}
@@ -267,7 +305,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-          <p></p>{errors.secondSpotImg && <div className="error-message">{errors.secondSpotImg}</div>}
+          <p></p>{errors.secondSpotImg ? <div className="error-message">{errors.secondSpotImg}</div>: null}
           <input
             type="text"
             onChange={(e) => setSecondSpotImg(e.target.value)}
@@ -277,7 +315,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-          <p></p>{errors.thirdSpotImg && <div className="error-message">{errors.thirdSpotImg}</div>}
+          <p></p>{errors.thirdSpotImg ? <div className="error-message">{errors.thirdSpotImg}</div>: null}
           <input
             type="text"
             onChange={(e) => setThirdSpotImg(e.target.value)}
@@ -287,7 +325,7 @@ const UpdateSpot = () => {
           />
         </label>
         <label>
-          <p></p>{errors.fourthSpotImg && <div className="error-message">{errors.fourthSpotImg}</div>}
+          <p></p>{errors.fourthSpotImg ? <div className="error-message">{errors.fourthSpotImg}</div>: null}
           <input
             type="text"
             onChange={(e) => setFourthSpotImg(e.target.value)}
@@ -303,6 +341,7 @@ const UpdateSpot = () => {
       </form>
     </div>
   );
+}
 }
 
 

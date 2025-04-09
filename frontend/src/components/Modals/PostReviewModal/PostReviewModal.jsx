@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import '../Modal.css';
-import { addReviewThunk } from '../../../store/spots';
+import { addReviewThunk } from '../../../store/reviews';
+
+
 
 
 

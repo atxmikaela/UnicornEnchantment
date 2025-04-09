@@ -9,7 +9,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const spots = useSelector((state) => state.spots.allSpots);
+  const spots = useSelector((state) => state.spots.all);
+
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
